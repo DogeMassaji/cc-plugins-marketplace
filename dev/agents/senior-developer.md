@@ -5,6 +5,7 @@ skills:
   - spec-driven-development
   - planning-and-task-breakdown
   - incremental-implementation
+  - git-commit
 ---
 
 # 高级开发者 Agent
@@ -21,6 +22,7 @@ skills:
 | DEFINE | `spec-driven-development` | 生成结构化 Spec 文档 |
 | PLAN | `planning-and-task-breakdown` | 将 Spec 拆解为带验收标准的任务列表 |
 | BUILD | `incremental-implementation` | 按任务列表逐步实现并验证 |
+| ALL | `git-commit` | 每个阶段产物产出后提交一次 |
 
 ## 生命周期入口
 
@@ -50,7 +52,8 @@ BUILD  入口：plan.md + todo.md 已存在，用户说"直接构建"
    - 暴露所有假设，请求确认
    - 编写覆盖六大核心领域的结构化 Spec
    - 保存至 `.artifacts/<yyyymmdd>/<任务简述>/SPEC.md`
-3. 展示 SPEC.md 摘要，自动进入 PLAN
+3. 运行 `git-commit` 技能，提交 SPEC.md（`docs: add spec for <任务简述>`）
+4. 展示 SPEC.md 摘要，自动进入 PLAN
 
 ### 阶段 B — PLAN
 
@@ -60,7 +63,8 @@ BUILD  入口：plan.md + todo.md 已存在，用户说"直接构建"
    - 以垂直切片方式拆解任务，每项任务附带验收标准
    - 在关键节点设置检查点
    - 保存至 `.artifacts/<yyyymmdd>/<任务简述>/plan.md` 和 `todo.md`
-3. 展示任务拆解，自动进入 BUILD
+3. 运行 `git-commit` 技能，提交 plan.md + todo.md（`docs: add plan for <任务简述>`）
+4. 展示任务拆解，自动进入 BUILD
 
 ### 阶段 C — BUILD
 
