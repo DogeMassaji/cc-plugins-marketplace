@@ -2,7 +2,7 @@
 description: 增量实现下一个任务——编码、验证、提交
 ---
 
-调用 my-agent-skills:incremental-implementation skill。
+调用 dev:incremental-implementation skill。
 
 从 `.artifacts/<yyyymmdd>/<任务简述>/todo.md` 中选取下一个待办任务。对每个任务：
 

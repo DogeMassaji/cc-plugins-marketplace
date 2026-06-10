@@ -1,4 +1,4 @@
-# Getting Started with my-agent-skills
+# Getting Started with dev
 
 agent-skills works with any AI coding agent that accepts Markdown instructions. This guide covers the universal approach. For tool-specific setup, see the dedicated guides.
 

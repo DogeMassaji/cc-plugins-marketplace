@@ -1,6 +1,6 @@
 # Skill 格式说明
 
-本文档描述 my-agent-skills 的 SKILL.md 文件结构和格式，供创建新 Skill 或理解现有 Skill 时参考。
+本文档描述 dev 的 SKILL.md 文件结构和格式，供创建新 Skill 或理解现有 Skill 时参考。
 
 ## 文件位置
 

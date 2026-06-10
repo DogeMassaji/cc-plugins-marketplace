@@ -7,8 +7,8 @@ on:
 
 env:
   MARKETPLACE_NAME: dogemassaji-marketplace
-  PLUGIN_NAME: my-agent-skills
-  PLUGIN_DIR: ./my-agent-skills
+  PLUGIN_NAME: dev
+  PLUGIN_DIR: ./dev
 
 jobs:
   validate:

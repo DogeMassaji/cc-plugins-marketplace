@@ -1,11 +1,11 @@
 {
-  "name": "my-agent-skills",
+  "name": "dev",
   "description": "Production-grade engineering skills for AI coding agents — covering the full software development lifecycle from spec to ship. Forked from @addyosmani/agent-skills",
   "version": "1.0.0",
   "author": {
     "name": "DogeMassaji"
   },
-  "homepage": "https://github.com/DogeMassaji/cc-plugins-marketplace/tree/main/my-agent-skills",
+  "homepage": "https://github.com/DogeMassaji/cc-plugins-marketplace/tree/main/dev",
   "repository": "https://github.com/DogeMassaji/cc-plugins-marketplace",
   "license": "MIT",
   "keywords": ["skills", "agents", "engineering", "spec", "review", "planning", "security"],

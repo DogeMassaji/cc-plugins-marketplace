@@ -1,5 +1,5 @@
 #!/bin/bash
-# my-agent-skills session start hook
+# dev session start hook
 # Injects the using-agent-skills meta-skill into every new session
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

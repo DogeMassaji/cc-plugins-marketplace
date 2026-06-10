@@ -1,4 +1,4 @@
-# my-agent-skills
+# dev
 
 AI 编码 Agent 的工程工作流 Skill，覆盖 define, plan, build, review 四个阶段。
 

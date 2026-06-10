@@ -2,7 +2,7 @@
 description: 将工作拆分为小而可验证的任务，附带验收标准和依赖排序
 ---
 
-调用 my-agent-skills:planning-and-task-breakdown skill。
+调用 dev:planning-and-task-breakdown skill。
 
 阅读已有 Spec（`.artifacts/<yyyymmdd>/<任务简述>/SPEC.md` 或等效文档）和相关代码库部分。然后：
 

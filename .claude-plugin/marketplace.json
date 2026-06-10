@@ -8,10 +8,10 @@
   },
   "plugins": [
     {
-      "name": "my-agent-skills",
-      "source": "./my-agent-skills",
+      "name": "dev",
+      "source": "./dev",
       "description": "Production-grade engineering skills covering every phase of software development: spec, plan, build, and review.",
-      "homepage": "https://github.com/DogeMassaji/cc-plugins-marketplace/tree/main/my-agent-skills",
+      "homepage": "https://github.com/DogeMassaji/cc-plugins-marketplace/tree/main/dev",
       "license": "MIT",
       "keywords": ["skills", "agents", "engineering", "spec", "review"]
     }

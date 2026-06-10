@@ -1,4 +1,4 @@
-# my-agent-skills 精简参考
+# dev 精简参考
 
 命令、Skill、Hook 说明。
 
@@ -12,7 +12,7 @@
 | `/plan` | Plan | `planning-and-task-breakdown` | — |
 | `/build` | Build | `incremental-implementation` | — |
 | `/review` | Review | `code-review-and-quality` | `security-and-hardening` |
-| `/workflow` | 全流程 | 串行编排：spec → plan → build → review | 阶段间用户确认 |
+| `/workflow` | 全流程 | 串行编排：dev-define-agent → dev-plan-agent → dev-build-agent → dev-review-agent | 阶段间用户确认 |
 
 ---
 
@@ -54,7 +54,7 @@
 
 ### `/workflow` — 串行全流程流水线
 
-spec → plan → build → review，四个阶段各自在独立 subagent 中运行。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。阶段间用户确认，支持跳过。
+dev-define-agent → dev-plan-agent → dev-build-agent → dev-review-agent，四个阶段各自在独立 subagent 中运行。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。阶段间用户确认，支持跳过。
 
 - 命令：`.claude/commands/workflow.md`
 
@@ -108,7 +108,7 @@ BUILD  → /build  → incremental-implementation
 REVIEW → /review → code-review-and-quality + security-and-hardening
 ```
 
-快捷方式：`/workflow` 提供 spec → plan → build → review 串行编排。
+快捷方式：`/workflow` 提供 dev-define-agent → dev-plan-agent → dev-build-agent → dev-review-agent 串行编排。
 
 ---
 

@@ -2,7 +2,7 @@
 description: 五轴代码审查——正确性、可读性、架构、安全性、性能
 ---
 
-调用 my-agent-skills:code-review-and-quality skill。
+调用 dev:code-review-and-quality skill。
 
 审查当前变更（已暂存或最近提交），覆盖全部五个维度：
 

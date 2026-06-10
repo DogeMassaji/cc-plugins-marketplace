@@ -14,7 +14,7 @@
 | `/plan` | Plan | 拆分为可验证的小任务 |
 | `/build` | Build | 增量实现 |
 | `/review` | Review | 五轴代码审查 |
-| `/workflow` | 全流程 | 串行：spec → plan → build |
+| `/workflow` | 全流程 | 串行：dev-define-agent → dev-plan-agent → dev-build-agent → dev-review-agent |
 
 ---
 
@@ -58,6 +58,7 @@ skills/                    # 7 个 Skill（每目录一个 SKILL.md）
 .claude/commands/          # 5 个 Slash Command
 references/                # 安全检查清单
 hooks/                     # Session 生命周期 Hooks
+agents/                    # 4 个阶段 persona
 docs/                      # skill-anatomy 格式说明
 ```
 
