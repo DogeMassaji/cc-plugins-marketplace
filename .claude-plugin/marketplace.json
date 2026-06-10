@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "dogemassaji-marketplace",
+  "description": "Personal Claude Code plugins marketplace — agent skills, custom commands, hooks, and workflow tooling.",
+  "owner": {
+    "name": "DogeMassaji",
+    "url": "https://github.com/DogeMassaji"
+  },
+  "plugins": [
+    {
+      "name": "my-agent-skills",
+      "source": "./my-agent-skills",
+      "description": "Production-grade engineering skills covering every phase of software development: spec, plan, build, and review.",
+      "homepage": "https://github.com/DogeMassaji/cc-plugins-marketplace/tree/main/my-agent-skills",
+      "license": "MIT",
+      "keywords": ["skills", "agents", "engineering", "spec", "review"]
+    }
+  ]
+}
