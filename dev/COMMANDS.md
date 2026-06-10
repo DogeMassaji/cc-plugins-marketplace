@@ -54,7 +54,7 @@
 
 ### `/workflow` — 串行全流程流水线
 
-dev-define-agent → dev-plan-agent → dev-build-agent → dev-review-agent，四个阶段各自在独立 subagent 中运行。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。阶段间用户确认，支持跳过。
+`senior-developer`（DEFINE → PLAN → BUILD）→ `senior-reviewer`（REVIEW），两个 subagent 自动串行运行，无需人工确认。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。支持跳过入口：从 plan / build / review 直接开始。
 
 - 命令：`.claude/commands/workflow.md`
 

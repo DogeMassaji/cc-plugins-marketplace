@@ -6,6 +6,19 @@
 
 AI 编码 Agent 的 Skill 集合，覆盖 define, plan, build, review 四个开发阶段。
 
+## Agent 发现
+
+```
+任务到达
+    │
+    ├── 需求 → 代码全流程？──────→ /workflow
+    │         ├── DEFINE + PLAN + BUILD → senior-developer
+    │         └── REVIEW              → senior-reviewer
+    │
+    ├── 仅 DEFINE + PLAN + BUILD？──→ senior-developer
+    └── 仅 REVIEW？─────────────────→ senior-reviewer
+```
+
 ## Skill 发现
 
 ```
