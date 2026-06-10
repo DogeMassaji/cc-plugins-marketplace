@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  MARKETPLACE_NAME: dogemassaji-marketplace
+  MARKETPLACE_NAME: cc-plugins-marketplace
   PLUGIN_NAME: dev
   PLUGIN_DIR: ./dev
 

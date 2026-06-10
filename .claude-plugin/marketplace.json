@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "dogemassaji-marketplace",
+  "name": "cc-plugins-marketplace",
   "description": "Personal Claude Code plugins marketplace — agent skills, custom commands, hooks, and workflow tooling.",
   "owner": {
     "name": "DogeMassaji",
