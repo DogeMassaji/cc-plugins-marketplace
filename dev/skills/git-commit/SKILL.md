@@ -3,39 +3,39 @@ name: git-commit
 description: Creates well-formatted git commits following conventional commit standards. Use after completing a task or producing an artifact. Generates commit messages in Chinese.
 ---
 
-## Usage
+## 用法
 ```
 /commit
 ```
 
-## Behavior
-1. Analyze staged changes with `git diff --staged`
-2. Generate a conventional commit message in chinese
-3. Create the commit with proper formatting
+## 行为
+1. 通过 `git diff --staged` 分析暂存的变更
+2. 生成中文 conventional commit message
+3. 以正确格式创建提交
 
-## Commit Format
+## 提交格式
 ```
-<type>(<scope>): <description>
+<type>(<scope>): <中文描述>
 
 [optional body]
 
 [optional footer]
 ```
 
-## Types
-- feat: New feature
-- fix: Bug fix
-- docs: Documentation changes
-- style: Code style changes
-- refactor: Code refactoring
-- test: Adding or modifying tests
-- chore: Maintenance tasks
+## 类型
+- feat: 新功能
+- fix: 缺陷修复
+- docs: 文档变更
+- style: 代码风格变更
+- refactor: 代码重构
+- test: 测试补充或修改
+- chore: 维护任务
 
-## Example Output
+## 示例输出
 ```
-feat(auth): add password reset functionality
+feat(auth): 增加密码重置功能
 
-- Add forgot password form
-- Implement email verification flow
-- Add password reset endpoint
+- 增加忘记密码表单
+- 实现邮箱验证流程
+- 增加密码重置接口
 ```
