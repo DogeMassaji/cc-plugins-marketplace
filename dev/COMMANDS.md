@@ -12,7 +12,7 @@
 | `/plan` | Plan | `planning-and-task-breakdown` | — |
 | `/build` | Build | `incremental-implementation` | — |
 | `/review` | Review | `code-review-and-quality` | `security-and-hardening` |
-| `/workflow` | 全流程 | 串行编排：senior-developer-planner (opus) → senior-developer (sonnet) → senior-reviewer (opus) | 阶段间用户确认 |
+| `/workflow` | 全流程 | 串行编排：planner (opus) → backend (sonnet) → api.md → frontend (sonnet) → reviewer (opus) | 前后端分离时后端先完成再前端 |
 
 ---
 
@@ -54,7 +54,11 @@
 
 ### `/workflow` — 串行全流程流水线
 
-`senior-developer-planner` (opus: DEFINE → PLAN) → `senior-developer` (sonnet: BUILD) → `senior-reviewer` (opus: REVIEW)，三个 subagent 自动串行运行。每个 subagent 调用时显式指定 `model` 参数，不依赖 frontmatter。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。支持跳过入口：从 plan / build / review 直接开始。
+前后端分离：`senior-developer-planner` (opus: DEFINE → PLAN) → `senior-developer-backend` (sonnet: BUILD 后端) → 产出 `api.md` → `senior-developer-frontend` (sonnet: BUILD 前端 → 消费 api.md) → `senior-reviewer` (opus: REVIEW)。后端先完成并生成接口文档，前端基于真实文档实现。
+
+单体项目：`senior-developer-planner` → `senior-developer` → `senior-reviewer`。
+
+每个 subagent 调用时显式指定 `model` 参数，不依赖 frontmatter。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。支持跳过入口：从 plan / build-backend / build-frontend / review 直接开始。
 
 - 命令：`.claude/commands/workflow.md`
 
@@ -75,7 +79,7 @@
 
 ---
 
-## 四、完整 Skill 清单（8 个）
+## 四、完整 Skill 清单（9 个）
 
 | Skill | 阶段 | 命令 | 说明 |
 |-------|------|------|------|
@@ -84,6 +88,7 @@
 | `planning-and-task-breakdown` | Plan | `/plan` | 垂直切片，任务拆分 |
 | `incremental-implementation` | Build | `/build` | 逐个任务增量实现 |
 | `backend-test-generator` | Build | — | 根据变更自动生成后端测试用例并执行 |
+| `api-doc-generator` | Build | — | 扫描后端路由/控制器自动生成 API 接口文档 |
 | `code-review-and-quality` | Review | `/review` | 五轴审查 |
 | `security-and-hardening` | Review | `/review` 安全维度 | OWASP 防护、威胁建模、AI/LLM |
 | `using-agent-skills` | Meta | session 自动注入 | Skill 发现与路由，核心行为规范 |
@@ -109,7 +114,7 @@ BUILD  → /build  → incremental-implementation
 REVIEW → /review → code-review-and-quality + security-and-hardening
 ```
 
-快捷方式：`/workflow` 提供 senior-developer-planner (opus) → senior-developer (sonnet) → senior-reviewer (opus) 串行编排。
+快捷方式：`/workflow` 提供 senior-developer-planner (opus) → senior-developer-backend (sonnet) → api.md → senior-developer-frontend (sonnet) → senior-reviewer (opus) 串行编排（前后端分离），或单体项目 senior-developer-planner → senior-developer → senior-reviewer。
 
 ---
 
@@ -132,6 +137,7 @@ REVIEW → /review → code-review-and-quality + security-and-hardening
 | `skills/planning-and-task-breakdown/SKILL.md` | Plan |
 | `skills/incremental-implementation/SKILL.md` | Build |
 | `skills/backend-test-generator/SKILL.md` | Build |
+| `skills/api-doc-generator/SKILL.md` | Build |
 | `skills/code-review-and-quality/SKILL.md` | Review |
 | `skills/security-and-hardening/SKILL.md` | Review |
 | `skills/using-agent-skills/SKILL.md` | Meta |

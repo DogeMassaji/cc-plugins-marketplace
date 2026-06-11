@@ -1,10 +1,11 @@
 ---
 name: senior-developer
-description: 高级开发者 Agent，负责 BUILD 阶段的代码实现。Use after senior-developer-planner has produced plan.md + todo.md. Reads the plan and implements tasks incrementally, committing as each task completes. Fails fast on any task that cannot be completed.
+description: 高级开发者 Agent，负责 BUILD 阶段的代码实现。Use after senior-developer-planner has produced plan.md + todo.md. Reads the plan and implements tasks incrementally. For fullstack projects, use senior-developer-backend and senior-developer-frontend instead.
 model: sonnet
 skills:
   - incremental-implementation
   - backend-test-generator
+  - api-doc-generator
   - git-commit
 ---
 
@@ -32,7 +33,8 @@ skills:
 | 阶段 | 技能 | 触发条件 |
 |------|------|----------|
 | BUILD | `incremental-implementation` | 按 todo.md 逐任务实现并验证 |
-| BUILD | `backend-test-generator` | 根据变更自动生成后端测试用例并执行 |
+| BUILD | `backend-test-generator` | 变更涉及后端逻辑时自动生成测试 |
+| BUILD | `api-doc-generator` | 项目有 HTTP API 时生成接口文档 |
 | BUILD | `git-commit` | 每个任务完成后提交一次 |
 
 ## 生命周期入口
@@ -61,7 +63,10 @@ BUILD 入口：plan.md + todo.md 已存在
      - 提交使用 `git-commit` 技能，message 格式：`feat: <任务简述>`
      - 任意任务失败时立即停止并回报
 
-3. **汇报结果**
+3. **生成测试**（若涉及后端逻辑）
+   - 运行 `backend-test-generator` 生成测试
+
+4. **汇报结果**
    - 已完成任务列表
    - 提交记录摘要
    - 失败任务及原因（如有）

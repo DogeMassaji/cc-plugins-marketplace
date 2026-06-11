@@ -35,9 +35,11 @@ DEFINE 入口：需求存在但无 spec.md
               → 执行 spec-driven-development
               → 生成 spec.md 并提交，自动进入 PLAN
 
-PLAN   入口：SPEC.md 已存在，用户说"从 plan 开始"
+PLAN   入口：spec.md 已存在，用户说"从 plan 开始"
+              → 判断是否前后端分离项目
               → 直接执行 planning-and-task-breakdown
-              → 生成 plan.md + todo.md 并提交，交接给 senior-developer
+              → 生成 plan.md + todo.md（或 todo_backend.md + todo_frontend.md）并提交
+              → 交接给 senior-developer
 ```
 
 ## 执行流程
@@ -54,23 +56,56 @@ PLAN   入口：SPEC.md 已存在，用户说"从 plan 开始"
 
 ### 阶段 B — PLAN
 
-1. 读取 spec.md 和相关代码库（只读）
-2. 运行 `planning-and-task-breakdown` 技能：
+1. **判断前后端分离**
+   - 扫描项目根目录和子目录结构，检查以下信号：
+     - 存在 `frontend/` `backend/` `client/` `server/` `web/` `api/` 等独立目录
+     - 前后端各自有独立的包管理文件（如 `frontend/package.json` + `backend/go.mod`）
+     - monorepo 结构（`packages/frontend` + `packages/backend`）
+     - `CLAUDE.md` 或 README 中描述的前后端分离架构
+   - 判定为前后端分离后，后续任务拆解按前后端分别输出
+
+2. 读取 spec.md 和相关代码库（只读）
+
+3. 运行 `planning-and-task-breakdown` 技能：
    - 识别组件依赖图
    - 以垂直切片方式拆解任务，每项任务附带验收标准
    - 在关键节点设置检查点
+
+4. **输出任务列表（区分是否前后端分离）**
+
+   **非前后端分离项目：**
    - 保存至 `.artifacts/<yyyymmdd>/<任务简述>/plan.md` 和 `todo.md`
-3. 运行 `git-commit` 技能，提交 plan.md + todo.md（`docs: add plan for <任务简述>`）
-4. 展示任务拆解摘要，提示用户交由 senior-developer Agent 执行 BUILD
+
+   **前后端分离项目：**
+   - 保存至 `.artifacts/<yyyymmdd>/<任务简述>/plan.md`（整体方案，标注前后端子方案）
+   - `todo_backend.md`：后端任务列表，按依赖排序
+   - `todo_frontend.md`：前端任务列表，按依赖排序
+   - 跨端联调任务放入 `todo_backend.md` 末尾或最后完成的一端
+
+5. 运行 `git-commit` 技能，提交产物（`docs: add plan for <任务简述>`）
+
+6. 展示任务拆解摘要。前后端分离项目需说明：
+   - 后端任务数 / 前端任务数
+   - 前后端可并行执行的任务
+   - 前后端依赖关系（前端依赖后端接口的任务标注清楚）
 
 ## 产物归档
 
 所有产物存放于 `.artifacts/<yyyymmdd>/<任务简述>/`：
 
+**非前后端分离：**
 ```
 spec.md     ← DEFINE 阶段产出
 plan.md     ← PLAN 阶段产出
 todo.md     ← PLAN 阶段产出
+```
+
+**前后端分离：**
+```
+spec.md            ← DEFINE 阶段产出
+plan.md            ← PLAN 阶段产出（整体方案 + 前后端子方案）
+todo_backend.md    ← PLAN 阶段产出（后端任务）
+todo_frontend.md   ← PLAN 阶段产出（前端任务）
 ```
 
 ## 规则
@@ -80,3 +115,4 @@ todo.md     ← PLAN 阶段产出
 3. **失败即停**——任何阶段出现无法解决的问题，立即停止并向用户说明
 4. **假设透明**——在 DEFINE 阶段立即暴露所有假设，不默默填充
 5. **只策划不实现**——不写实现代码，不运行 `incremental-implementation`
+6. **前后端判定**——PLAN 阶段第一步必须扫描项目结构判断是否前后端分离。判定信号：独立的前后端目录、各自包管理文件、monorepo 结构、CLAUDE.md 中的架构描述。判定结果在 plan.md 中明确记录
