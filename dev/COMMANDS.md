@@ -12,7 +12,7 @@
 | `/plan` | Plan | `planning-and-task-breakdown` | — |
 | `/build` | Build | `incremental-implementation` | — |
 | `/review` | Review | `code-review-and-quality` | `security-and-hardening` |
-| `/workflow` | 全流程 | 串行编排：dev-define-agent → dev-plan-agent → dev-build-agent → dev-review-agent | 阶段间用户确认 |
+| `/workflow` | 全流程 | 串行编排：senior-developer-planner (opus) → senior-developer (sonnet) → senior-reviewer (opus) | 阶段间用户确认 |
 
 ---
 
@@ -22,7 +22,7 @@
 
 1. 向用户提问，澄清：目标用户、核心功能与验收标准、技术栈偏好与约束、边界条件
 2. 生成涵盖六大领域的结构化 Spec 说明
-3. 保存到 `.artifacts/<yyyymmdd>/<任务简述>/SPEC.md`，与用户确认
+3. 保存到 `.artifacts/<yyyymmdd>/<任务简述>/spec.md`，与用户确认
 
 - 命令：`.claude/commands/spec.md`
 - Skill：`skills/spec-driven-development/SKILL.md`
@@ -54,7 +54,7 @@
 
 ### `/workflow` — 串行全流程流水线
 
-`senior-developer`（DEFINE → PLAN → BUILD）→ `senior-reviewer`（REVIEW），两个 subagent 自动串行运行，无需人工确认。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。支持跳过入口：从 plan / build / review 直接开始。
+`senior-developer-planner` (opus: DEFINE → PLAN) → `senior-developer` (sonnet: BUILD) → `senior-reviewer` (opus: REVIEW)，三个 subagent 自动串行运行。每个 subagent 调用时显式指定 `model` 参数，不依赖 frontmatter。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。支持跳过入口：从 plan / build / review 直接开始。
 
 - 命令：`.claude/commands/workflow.md`
 
@@ -67,7 +67,7 @@
 ```
 .artifacts/
   └── <yyyymmdd>/<任务简述>/
-      ├── SPEC.md      # 结构化规格说明
+      ├── spec.md      # 结构化规格说明
       ├── plan.md      # 实现计划
       ├── todo.md      # 任务列表
       └── review.md    # 审查报告
@@ -108,7 +108,7 @@ BUILD  → /build  → incremental-implementation
 REVIEW → /review → code-review-and-quality + security-and-hardening
 ```
 
-快捷方式：`/workflow` 提供 dev-define-agent → dev-plan-agent → dev-build-agent → dev-review-agent 串行编排。
+快捷方式：`/workflow` 提供 senior-developer-planner (opus) → senior-developer (sonnet) → senior-reviewer (opus) 串行编排。
 
 ---
 

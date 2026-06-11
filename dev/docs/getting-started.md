@@ -104,7 +104,7 @@ The `/spec`、`/plan`、`/review` 和 `/workflow` 命令将产物保存到 `.art
 ```
 .artifacts/
   └── <yyyymmdd>/<任务简述>/
-      ├── SPEC.md      # 结构化规格说明
+      ├── spec.md      # 结构化规格说明
       ├── plan.md      # 实现计划
       ├── todo.md      # 任务列表
       └── review.md    # 审查报告
