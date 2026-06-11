@@ -75,7 +75,7 @@
 
 ---
 
-## 四、完整 Skill 清单（7 个）
+## 四、完整 Skill 清单（8 个）
 
 | Skill | 阶段 | 命令 | 说明 |
 |-------|------|------|------|
@@ -83,6 +83,7 @@
 | `spec-driven-development` | Define | `/spec` | 结构化 Spec 说明 |
 | `planning-and-task-breakdown` | Plan | `/plan` | 垂直切片，任务拆分 |
 | `incremental-implementation` | Build | `/build` | 逐个任务增量实现 |
+| `backend-test-generator` | Build | — | 根据变更自动生成后端测试用例并执行 |
 | `code-review-and-quality` | Review | `/review` | 五轴审查 |
 | `security-and-hardening` | Review | `/review` 安全维度 | OWASP 防护、威胁建模、AI/LLM |
 | `using-agent-skills` | Meta | session 自动注入 | Skill 发现与路由，核心行为规范 |
@@ -130,6 +131,7 @@ REVIEW → /review → code-review-and-quality + security-and-hardening
 | `skills/spec-driven-development/SKILL.md` | Define |
 | `skills/planning-and-task-breakdown/SKILL.md` | Plan |
 | `skills/incremental-implementation/SKILL.md` | Build |
+| `skills/backend-test-generator/SKILL.md` | Build |
 | `skills/code-review-and-quality/SKILL.md` | Review |
 | `skills/security-and-hardening/SKILL.md` | Review |
 | `skills/using-agent-skills/SKILL.md` | Meta |

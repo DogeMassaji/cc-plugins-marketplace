@@ -4,6 +4,7 @@ description: 高级开发者 Agent，负责 BUILD 阶段的代码实现。Use af
 model: sonnet
 skills:
   - incremental-implementation
+  - backend-test-generator
   - git-commit
 ---
 
@@ -31,6 +32,7 @@ skills:
 | 阶段 | 技能 | 触发条件 |
 |------|------|----------|
 | BUILD | `incremental-implementation` | 按 todo.md 逐任务实现并验证 |
+| BUILD | `backend-test-generator` | 根据变更自动生成后端测试用例并执行 |
 | BUILD | `git-commit` | 每个任务完成后提交一次 |
 
 ## 生命周期入口
