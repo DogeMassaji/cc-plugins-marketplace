@@ -17,7 +17,9 @@
     "./skills/security-and-hardening",
     "./skills/spec-driven-development",
     "./skills/using-agent-skills",
-    "./skills/git-commit"
+    "./skills/git-commit",
+    "./skills/api-doc-generator",
+    "./skills/backend-test-generator"
   ],
   "commands": [
     "./commands/build.md",
@@ -27,7 +29,10 @@
     "./commands/workflow.md"
   ],
   "agents": [
+    "./agents/senior-developer-planner.md",
     "./agents/senior-developer.md",
+    "./agents/senior-developer-frontend.md",
+    "./agents/senior-developer-backend.md",
     "./agents/senior-reviewer.md"
   ]
 }
