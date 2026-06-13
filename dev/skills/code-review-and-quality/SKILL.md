@@ -209,6 +209,7 @@ description: Conducts multi-axis code review. Use before merging any change. Use
 - [ ] 列表端点有分页
 
 ### 验证
+- [ ] 编译/类型检查通过（如项目有类型系统）
 - [ ] 测试通过
 - [ ] 构建成功
 - [ ] 手动验证完成（如适用）
@@ -237,6 +238,7 @@ description: Conducts multi-axis code review. Use before merging any change. Use
 
 - [ ] 所有 Critical 问题已解决
 - [ ] 所有 Important 问题已解决或明确延期且有正当理由
+- [ ] 编译/类型检查通过
 - [ ] 测试通过
 - [ ] 构建成功
 - [ ] 验证叙述已记录（什么变更了，如何验证的）
