@@ -65,6 +65,7 @@ BUILD 入口：plan.md + todo_backend.md 已存在
 3. **生成测试**
    - 对变更的后端代码运行 `backend-test-generator`
    - 生成集成测试/单元测试，执行并修复
+   - 使用 `git-commit` 技能提交测试代码和报告，message 格式：`test(backend): add tests for <任务简述>`
 
 4. **生成接口文档**
    - 全部任务完成后运行 `api-doc-generator`

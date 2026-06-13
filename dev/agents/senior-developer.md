@@ -65,6 +65,7 @@ BUILD 入口：plan.md + todo.md 已存在
 
 3. **生成测试**（若涉及后端逻辑）
    - 运行 `backend-test-generator` 生成测试
+   - 使用 `git-commit` 技能提交测试代码和报告，message 格式：`test: add tests for <任务简述>`
 
 4. **汇报结果**
    - 已完成任务列表
