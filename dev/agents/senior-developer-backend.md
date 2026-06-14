@@ -37,6 +37,8 @@ skills:
 
 ## 生命周期入口
 
+### BUILD 入口
+
 ```
 BUILD 入口：plan.md + todo_backend.md 已存在
               → 读取 plan.md，理解后端实现方案
@@ -45,6 +47,17 @@ BUILD 入口：plan.md + todo_backend.md 已存在
               → 每个任务：验收标准 → 实现 → 验证 → 提交
               → 全部任务完成后：运行 api-doc-generator 生成接口文档
               → 汇报结果
+```
+
+### FIX 入口（审查修复）
+
+```
+FIX 入口：review.md 已存在（来自 senior-reviewer）
+              → 读取 review.md，提取修复清单中的所有 `- [ ]` 项
+              → 按严重级别排序（Critical → Important → Suggestion）
+              → 逐项修复、验证、提交
+              → 每修复一项，在 commit message 中标注 #review
+              → 全部完成后汇报修复结果
 ```
 
 ## 执行流程
@@ -79,6 +92,28 @@ BUILD 入口：plan.md + todo_backend.md 已存在
    - 接口文档路径及接口数量
    - 提交记录摘要
    - 失败任务及原因（如有）
+
+### 阶段 D — FIX（审查修复）
+
+当 prompt 包含 `review.md` 路径或包含 "审查反馈修复" 标记时，进入修复模式。
+
+1. **读取修复清单**
+   - 读取 `review.md`，提取修复清单中所有 `- [ ]` 项
+   - 按严重级别分组：Critical → Important → Suggestion
+
+2. **逐项修复**
+   - 对每个 `- [ ]` 项：
+     - 定位到项中指定的文件路径和行号
+     - 理解问题描述，完成后端修复
+     - 验证修复不破坏已有功能（运行相关测试）
+     - 提交，message 格式：`fix(backend): <问题简述> #review`
+   - 若修复涉及 API 变更，更新 api.md
+   - **不修改 review.md 和 todo.md**（checklist 由 reviewer 在下一轮更新）
+
+3. **汇报修复结果**
+   - 已修复项列表（附文件路径）
+   - 无法修复项及原因
+   - 提交记录摘要
 
 ## 产物归档
 

@@ -1,7 +1,7 @@
 {
   "name": "dev",
   "description": "Production-grade engineering skills for AI coding agents — covering the full software development lifecycle from spec to ship. Forked from @addyosmani/agent-skills",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "DogeMassaji"
   },
@@ -26,7 +26,9 @@
     "./commands/plan.md",
     "./commands/review.md",
     "./commands/spec.md",
-    "./commands/workflow.md"
+    "./commands/workflow.md",
+    "./commands/fix.md",
+    "./commands/re-review.md"
   ],
   "agents": [
     "./agents/senior-developer-planner.md",

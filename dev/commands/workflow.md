@@ -1,5 +1,5 @@
 ---
-description: 串行流水线——启动 senior-developer-planner (opus) → 判断项目类型 → 按单体/前后端分离两条路径执行构建 → senior-reviewer (opus)
+description: 串行流水线——启动 senior-developer-planner (opus) → 判断项目类型 → 按单体/前后端分离两条路径执行构建 → senior-reviewer (opus) → 修复 → 重新审查验证
 ---
 
 调用专职 subagent 完成完整开发流水线，每个 subagent 显式指定 model 参数：
@@ -12,7 +12,9 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 | 3-B | `senior-developer-backend` | `sonnet` | BUILD（后端） |
 | — | 产出 `api.md` | — | 接口文档 |
 | 4-B | `senior-developer-frontend` | `sonnet` | BUILD（前端） |
-| 5 | `senior-reviewer` | `opus` | REVIEW |
+| 5 | `senior-reviewer`（第一轮） | `opus` | REVIEW → 标注 TODO 状态 → 生成修复清单 |
+| 6 | 对应 dev agent | `sonnet` | FIX — 按修复清单逐项修复 |
+| 7 | `senior-reviewer`（重新审查） | `opus` | RE-REVIEW → 验证修复 → 更新 TODO 状态 |
 
 **产物归档：** 所有阶段产物统一存放在 `.artifacts/<yyyymmdd>/<任务简述>/` 目录下。
 
@@ -87,17 +89,55 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 
 ---
 
-## 步骤 5——启动 senior-reviewer（opus）
+## 步骤 5——启动 senior-reviewer（第一轮审查）
 
-构建阶段全部完成后，启动 `senior-reviewer` subagent，显式指定 `model: "opus"`。
+构建阶段全部完成后，启动 `senior-reviewer` subagent，显式指定 `model: "opus"`，传入以下信息：
+- 构建阶段使用的 todo 文件路径（`todo.md` 或 `todo_backend.md` + `todo_frontend.md`）
+- 项目类型（单体/前后端分离）
 
 该 subagent 将执行：
-- REVIEW：覆盖五个维度审查所有变更（前后端分离项目含两端代码），必要时深入执行安全加固
-- 生成 `review.md` 并提交，若有 Critical 问题询问用户处理方式
+1. **TODO 状态检查** — 读取 todo 文件，对照 git diff 逐项标注完成状态，**更新 todo.md** 中的实际标记
+2. **REVIEW** — 覆盖五个维度审查所有变更，必要时深入执行安全加固
+3. **生成修复清单** — 以 `- [ ]` 格式在 `review.md` 中列出待修复项，每个问题标注文件路径和行号
+4. 输出 `review.md` 并提交（含 todo.md 变更）
 
-等待 subagent 完成。向用户展示审查报告。
+等待 subagent 完成。向用户展示审查报告。若无任何修复项，流水线结束。
 
 ---
+
+## 步骤 6——修复审查问题
+
+读取 `review.md` 中的修复清单，选择对应的开发 agent 进行修复：
+
+| 项目类型 | 修复 agent |
+|----------|-----------|
+| 单体项目 | `senior-developer`（sonnet） |
+| 前后端分离 — 仅有后端问题 | `senior-developer-backend`（sonnet） |
+| 前后端分离 — 仅有前端问题 | `senior-developer-frontend`（sonnet） |
+| 前后端分离 — 两端都有问题 | 先启动后端修复 agent，完成后再启动前端修复 agent |
+
+启动对应的 dev subagent，显式指定 `model: "sonnet"`，prompt 中包含：
+- 指向 `review.md` 的路径
+- 明确指令：读取 review.md 中的修复清单，逐项修复代码（不修改 review.md，checkbox 由 reviewer 在下一轮更新）
+- 项目类型和使用的 todo 文件路径
+
+等待 subagent 完成。若无修复 agent 被调用（全部为 suggestion 级别），跳至步骤 7。
+
+## 步骤 7——重新审查验证
+
+再次启动 `senior-reviewer` subagent，显式指定 `model: "opus"`，传入：
+- `review.md` 路径（包含修复清单）
+- 模式标记：`re-review`
+
+该 subagent 将执行：
+1. **增量验证** — 读取 review.md 中的修复清单，逐项检查是否已修复
+2. **更新 TODO 状态** — 已修复项标注 `[x]`，未完全修复项追加备注 `(未完全修复: ...)`，同步更新 todo.md
+3. **检查回归** — 确认修复没有引入新问题
+4. 更新 `review.md` 和 `todo.md` 并提交
+
+等待 subagent 完成。向用户展示重新审查报告。
+
+**循环上限**：修复-审查循环最多执行 2 轮。若第 2 轮仍有未修复项，报告用户决策。
 
 ## 跳过入口
 
@@ -106,7 +146,9 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 | "从 plan 开始" | 启动 `senior-developer-planner`，告知从 PLAN 入口 |
 | "直接构建后端" | 跳过步骤 1-2，直接执行步骤 3-B |
 | "直接构建前端" | 跳过步骤 1-2 和 3-B，直接执行步骤 4-B |
-| "直接审查" | 跳过所有构建步骤，直接执行步骤 5 |
+| "直接审查" | 跳过所有构建步骤，直接执行步骤 5（第一轮审查） |
+| "直接修复" | 跳过步骤 1-5，传入 review.md 路径直接执行步骤 6（修复） |
+| "重新审查" | 跳过步骤 1-6，传入 review.md 路径直接执行步骤 7（重新审查） |
 
 ---
 
@@ -122,7 +164,9 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
   步骤 3-B: Agent(description="实现后端", subagent_type="senior-developer-backend", model="sonnet", prompt="...")
   步骤 4-B: Agent(description="实现前端", subagent_type="senior-developer-frontend", model="sonnet", prompt="...")
 
-步骤 5: Agent(description="审查代码", subagent_type="senior-reviewer", model="opus", prompt="...")
+步骤 5 (第一轮审查): Agent(description="审查代码", subagent_type="senior-reviewer", model="opus", prompt="...")
+步骤 6 (修复):       Agent(description="修复审查问题", subagent_type="senior-developer", model="sonnet", prompt="审查反馈修复: 读取 .artifacts/.../review.md，逐项修复并提交")
+步骤 7 (重新审查):   Agent(description="重新审查", subagent_type="senior-reviewer", model="opus", prompt="[re-review] 检查修复: review.md 路径为 .artifacts/.../review.md")
 ```
 
 ## 规则
@@ -135,3 +179,6 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 6. 产物驱动——subagent 之间通过文件产物传递信息，不依赖上下文记忆
 7. 任一 subagent 失败则停止流水线，不得继续
 8. 所有产物写入 `.artifacts/<yyyymmdd>/<任务简述>/`，不得散落在项目根目录
+9. **修复-审查循环上限 2 轮**——第 2 轮仍有未修复项则报告用户决策，不得无限循环
+10. **修复清单即契约**——review.md 中的 `- [ ]` 修复项是 dev agent 修复的唯一依据，不得自行扩大修复范围
+11. **重新审查必须增量**——只检查修复项和回归，不重新审查所有代码
