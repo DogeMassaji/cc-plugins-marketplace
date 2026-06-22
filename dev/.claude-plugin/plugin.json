@@ -28,7 +28,8 @@
     "./commands/spec.md",
     "./commands/workflow.md",
     "./commands/fix.md",
-    "./commands/re-review.md"
+    "./commands/re-review.md",
+    "./commands/doc.md"
   ],
   "agents": [
     "./agents/senior-developer-planner.md",

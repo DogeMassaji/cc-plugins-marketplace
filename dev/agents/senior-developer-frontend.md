@@ -3,8 +3,8 @@ name: senior-developer-frontend
 description: 高级前端开发者 Agent，负责 BUILD 阶段的前端代码实现。Use after senior-developer-backend has completed and generated API docs. Reads the plan, todo_frontend.md, and backend API docs to implement frontend tasks incrementally. Fails fast on any task that cannot be completed.
 model: sonnet
 skills:
-  - incremental-implementation
-  - git-commit
+  - dev:incremental-implementation
+  - dev:git-commit
 ---
 
 # 高级前端开发者 Agent
@@ -30,8 +30,8 @@ skills:
 
 | 阶段 | 技能 | 触发条件 |
 |------|------|----------|
-| BUILD | `incremental-implementation` | 按 todo_frontend.md 逐任务实现并验证 |
-| BUILD | `git-commit` | 每个任务完成后提交一次 |
+| BUILD | `dev:incremental-implementation` | 按 todo_frontend.md 逐任务实现并验证 |
+| BUILD | `dev:git-commit` | 每个任务完成后提交一次 |
 
 ## 生命周期入口
 
@@ -72,11 +72,11 @@ FIX 入口：review.md 已存在（来自 senior-reviewer）
    - 读取 `.artifacts/<yyyymmdd>/<任务简述>/todo_frontend.md`，获取任务列表
 
 3. **逐任务实现**
-   - 运行 `incremental-implementation` 技能：
+   - 运行 `dev:incremental-implementation` 技能：
      - 按 todo_frontend.md 顺序处理每个任务
      - 每个任务：对照接口文档 → 实现 UI/组件/状态管理/API 调用 → 验证 → 提交
      - API 调用层严格按 api.md 定义的方法、路径、参数类型实现
-     - 提交使用 `git-commit` 技能，message 格式：`feat(frontend): <任务简述>`
+     - 提交使用 `dev:git-commit` 技能，message 格式：`feat(frontend): <任务简述>`
      - 任意任务失败时立即停止并回报
 
 4. **汇报结果**

@@ -16,12 +16,12 @@ Agent Skills 是按开发阶段组织的工程工作流集合。每个 Skill 编
 ```
 任务到达
     │
-    ├── 需求不清晰？──────────────→ interview-me
-    ├── 新项目/新功能/变更？──────→ spec-driven-development
-    ├── 有 Spec，需要任务拆分？───→ planning-and-task-breakdown
-    ├── 实现代码？───────────────→ incremental-implementation
-    └── 审查代码？───────────────→ code-review-and-quality
-        └── 安全问题？───────────→ security-and-hardening
+    ├── 需求不清晰？──────────────→ dev:interview-me
+    ├── 新项目/新功能/变更？──────→ dev:spec-driven-development
+    ├── 有 Spec，需要任务拆分？───→ dev:planning-and-task-breakdown
+    ├── 实现代码？───────────────→ dev:incremental-implementation
+    └── 审查代码？───────────────→ dev:code-review-and-quality
+        └── 安全问题？───────────→ dev:security-and-hardening
 ```
 
 ## 核心行为准则
@@ -59,13 +59,13 @@ Agent Skills 是按开发阶段组织的工程工作流集合。每个 Skill 编
 ## 生命周期
 
 ```
-DEFINE → interview-me, spec-driven-development
-PLAN   → planning-and-task-breakdown
-BUILD  → incremental-implementation
-REVIEW → code-review-and-quality, security-and-hardening
+DEFINE → dev:interview-me, dev:spec-driven-development
+PLAN   → dev:planning-and-task-breakdown
+BUILD  → dev:incremental-implementation
+REVIEW → dev:code-review-and-quality, dev:security-and-hardening
 ```
 
-完整特性流程：interview-me → spec-driven-development → planning-and-task-breakdown → incremental-implementation → code-review-and-quality
+完整特性流程：dev:interview-me → dev:spec-driven-development → dev:planning-and-task-breakdown → dev:incremental-implementation → dev:code-review-and-quality
 
 ## Skill 规则
 

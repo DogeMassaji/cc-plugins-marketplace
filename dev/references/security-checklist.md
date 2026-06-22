@@ -1,6 +1,6 @@
 # 安全检查清单
 
-Web 应用安全快速参考。配合 `security-and-hardening` Skill 使用。
+Web 应用安全快速参考。配合 `dev:security-and-hardening` Skill 使用。
 
 ## 目录
 

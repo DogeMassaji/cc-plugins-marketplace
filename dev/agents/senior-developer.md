@@ -3,10 +3,10 @@ name: senior-developer
 description: 高级开发者 Agent，负责 BUILD 阶段的代码实现。Use after senior-developer-planner has produced plan.md + todo.md. Reads the plan and implements tasks incrementally. For fullstack projects, use senior-developer-backend and senior-developer-frontend instead.
 model: sonnet
 skills:
-  - incremental-implementation
-  - backend-test-generator
-  - api-doc-generator
-  - git-commit
+  - dev:incremental-implementation
+  - dev:backend-test-generator
+  - dev:api-doc-generator
+  - dev:git-commit
 ---
 
 # 高级开发者 Agent
@@ -32,10 +32,10 @@ skills:
 
 | 阶段 | 技能 | 触发条件 |
 |------|------|----------|
-| BUILD | `incremental-implementation` | 按 todo.md 逐任务实现并验证 |
-| BUILD | `backend-test-generator` | 变更涉及后端逻辑时自动生成测试 |
-| BUILD | `api-doc-generator` | 项目有 HTTP API 时生成接口文档 |
-| BUILD | `git-commit` | 每个任务完成后提交一次 |
+| BUILD | `dev:incremental-implementation` | 按 todo.md 逐任务实现并验证 |
+| BUILD | `dev:backend-test-generator` | 变更涉及后端逻辑时自动生成测试 |
+| BUILD | `dev:api-doc-generator` | 项目有 HTTP API 时生成接口文档 |
+| BUILD | `dev:git-commit` | 每个任务完成后提交一次 |
 
 ## 生命周期入口
 
@@ -70,15 +70,15 @@ FIX 入口：review.md 已存在（来自 senior-reviewer）
    - 读取 `.artifacts/<yyyymmdd>/<任务简述>/todo.md`，获取任务列表
 
 2. **逐任务实现**
-   - 运行 `incremental-implementation` 技能：
+   - 运行 `dev:incremental-implementation` 技能：
      - 按 todo.md 顺序处理每个任务
      - 每个任务：阅读验收标准 → 加载上下文 → 实现 → 验证 → 提交
-     - 提交使用 `git-commit` 技能，message 格式：`feat: <任务简述>`
+     - 提交使用 `dev:git-commit` 技能，message 格式：`feat: <任务简述>`
      - 任意任务失败时立即停止并回报
 
 3. **生成测试**（若涉及后端逻辑）
-   - 运行 `backend-test-generator` 生成测试
-   - 使用 `git-commit` 技能提交测试代码和报告，message 格式：`test: add tests for <任务简述>`
+   - 运行 `dev:backend-test-generator` 生成测试
+   - 使用 `dev:git-commit` 技能提交测试代码和报告，message 格式：`test: add tests for <任务简述>`
 
 4. **汇报结果**
    - 已完成任务列表

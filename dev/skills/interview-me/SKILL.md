@@ -11,7 +11,7 @@ description: Extracts what the user actually wants and refines vague ideas into 
 
 捕捉这个差距最便宜的时机是在任何 plan、spec 或代码存在之前。一旦开始构建，切换成本是真实存在的，用户会把错误的东西合理化"够好了"。不匹配就此锁定。
 
-本 Skill 在造成任何损失之前关闭这个差距。Interview-me 提取真实意图；如果意图仍然模糊（"我想要类似..."但没有具体形态）， Skill 接着应用结构化发散/收敛思维来生成和压力测试方案，然后再交接给 `spec-driven-development`。
+本 Skill 在造成任何损失之前关闭这个差距。Interview-me 提取真实意图；如果意图仍然模糊（"我想要类似..."但没有具体形态）， Skill 接着应用结构化发散/收敛思维来生成和压力测试方案，然后再交接给 `dev:spec-driven-development`。
 
 ## 何时使用
 
@@ -188,7 +188,7 @@ GUESS: <你对答案的假设，以及产生该假设的推理>
 
 简短的对比。
 
-**没有 `interview-me`：**
+**没有 `dev:interview-me`：**
 
 ```
 用户：  给我构建一个我们的指标的 dashboard
@@ -197,7 +197,7 @@ Agent： <开始提议图表库和布局>
 
 Agent 已经假设：为谁做、什么指标、"我们的团队"是什么意思、成功的样子是什么。这些都未说明。每一个假设都是用户以后可能说"那不是我的意思"的地方。
 
-**用了 `interview-me`：**
+**用了 `dev:interview-me`：**
 
 ```
 用户：给我构建一个我们的指标的 dashboard
@@ -226,8 +226,8 @@ Agent：<继续>
 
 ## 与其他 Skill 的互动
 
-- **`spec-driven-development`**：下游。一旦意图具体且方案确定（第 6 步完成或跳过），交接给 `spec-driven-development` 编写正式的 spec。
-- **`planning-and-task-breakdown`**：隔一个 hops 的下游（在 spec 之后）。
+- **`dev:spec-driven-development`**：下游。一旦意图具体且方案确定（第 6 步完成或跳过），交接给 `dev:spec-driven-development` 编写正式的 spec。
+- **`dev:planning-and-task-breakdown`**：隔一个 hops 的下游（在 spec 之后）。
 
 ## 警告信号
 

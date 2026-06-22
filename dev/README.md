@@ -2,7 +2,7 @@
 
 **AI 编码 Agent 的工程工作流 Skill 集合。**
 
-覆盖 Define → Plan → Build → Review 四个开发阶段。
+覆盖 Define → Plan → Build → Review → Fix → Re-Review 全开发阶段。
 
 ---
 
@@ -14,11 +14,14 @@
 | `/plan` | Plan | 拆分为可验证的小任务 |
 | `/build` | Build | 增量实现 |
 | `/review` | Review | 五轴代码审查 |
-| `/workflow` | 全流程 | 串行：`senior-developer`（spec→plan→build）→ `senior-reviewer`（review），自动运行 |
+| `/fix` | Fix | 按审查清单修复 |
+| `/re-review` | Re-Review | 验证修复结果 |
+| `/doc` | Doc | 文档归档整理 |
+| `/workflow` | 全流程 | 串行：planner → backend → frontend → reviewer → fix → re-review |
 
 ---
 
-## 全部 7 个 Skill
+## 全部 11 个 Skill
 
 ### Define — 明确要构建什么
 
@@ -32,6 +35,8 @@
 ### Build — 写代码
 
 - **incremental-implementation** — 垂直切片：实现 → 测试 → 验证 → 提交
+- **backend-test-generator** — 根据变更自动生成后端测试用例
+- **api-doc-generator** — 扫描后端路由/控制器自动生成 API 文档
 
 ### Review — 合并前质量门禁
 
@@ -41,25 +46,31 @@
 ### Meta
 
 - **using-agent-skills** — Skill 发现与路由，核心行为准则
+- **git-commit** — 中文 Conventional Commit 提交
+- **doc-archiver** — 按编号目录归档项目文档
 
 ---
 
 ## 项目结构
 
 ```
-skills/                    # 7 个 Skill（每目录一个 SKILL.md）
+skills/                    # 11 个 Skill（每目录一个 SKILL.md）
 ├── interview-me/
 ├── spec-driven-development/
 ├── planning-and-task-breakdown/
 ├── incremental-implementation/
+├── backend-test-generator/
+├── api-doc-generator/
 ├── code-review-and-quality/
 ├── security-and-hardening/
-└── using-agent-skills/
-.claude/commands/          # 5 个 Slash Command
+├── using-agent-skills/
+├── git-commit/
+└── doc-archiver/
+commands/                  # 8 个 Slash Command
 references/                # 安全检查清单
 hooks/                     # Session 生命周期 Hooks
-agents/                    # 2 个专职 Agent（senior-developer, senior-reviewer）
-docs/                      # skill-anatomy 格式说明
+agents/                    # 5 个专职 Agent（planner, developer, backend, frontend, reviewer）
+docs/                      # skill-anatomy 格式说明 + 快速入门
 ```
 
 ## 参考清单

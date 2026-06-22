@@ -1,28 +1,28 @@
 ---
-description: 串行流水线——启动 senior-developer-planner (opus) → 判断项目类型 → 按单体/前后端分离两条路径执行构建 → senior-reviewer (opus) → 修复 → 重新审查验证
+description: 串行流水线——启动 dev:senior-developer-planner (opus) → 判断项目类型 → 按单体/前后端分离两条路径执行构建 → dev:senior-reviewer (opus) → 修复 → 重新审查验证
 ---
 
 调用专职 subagent 完成完整开发流水线，每个 subagent 显式指定 model 参数：
 
 | 步骤 | Agent | model | 阶段 |
 |------|-------|-------|------|
-| 1 | `senior-developer-planner` | `opus` | DEFINE → PLAN |
+| 1 | `dev:senior-developer-planner` | `opus` | DEFINE → PLAN |
 | 2 | — | — | 判断项目类型（读取产物） |
-| 3-A | `senior-developer` | `sonnet` | BUILD（单体） |
-| 3-B | `senior-developer-backend` | `sonnet` | BUILD（后端） |
+| 3-A | `dev:senior-developer` | `sonnet` | BUILD（单体） |
+| 3-B | `dev:senior-developer-backend` | `sonnet` | BUILD（后端） |
 | — | 产出 `api.md` | — | 接口文档 |
-| 4-B | `senior-developer-frontend` | `sonnet` | BUILD（前端） |
-| 5 | `senior-reviewer`（第一轮） | `opus` | REVIEW → 标注 TODO 状态 → 生成修复清单 |
+| 4-B | `dev:senior-developer-frontend` | `sonnet` | BUILD（前端） |
+| 5 | `dev:senior-reviewer`（第一轮） | `opus` | REVIEW → 标注 TODO 状态 → 生成修复清单 |
 | 6 | 对应 dev agent | `sonnet` | FIX — 按修复清单逐项修复 |
-| 7 | `senior-reviewer`（重新审查） | `opus` | RE-REVIEW → 验证修复 → 更新 TODO 状态 |
+| 7 | `dev:senior-reviewer`（重新审查） | `opus` | RE-REVIEW → 验证修复 → 更新 TODO 状态 |
 
 **产物归档：** 所有阶段产物统一存放在 `.artifacts/<yyyymmdd>/<任务简述>/` 目录下。
 
 ---
 
-## 步骤 1——启动 senior-developer-planner（opus）
+## 步骤 1——启动 dev:senior-developer-planner（opus）
 
-启动 `senior-developer-planner` subagent，传入用户的需求描述，显式指定 `model: "opus"`。
+启动 `dev:senior-developer-planner` subagent，传入用户的需求描述，显式指定 `model: "opus"`。
 
 该 subagent 将依次执行：
 - 判断是否前后端分离项目
@@ -48,13 +48,13 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 
 ## 单体项目路径
 
-### 步骤 3-A——启动 senior-developer（sonnet）
+### 步骤 3-A——启动 dev:senior-developer（sonnet）
 
-启动 `senior-developer` subagent，显式指定 `model: "sonnet"`。
+启动 `dev:senior-developer` subagent，显式指定 `model: "sonnet"`。
 
 该 subagent 将执行：
 - BUILD：读取 plan.md + todo.md，按任务顺序逐项实现、验证并提交
-- 若项目有 HTTP API → 可选运行 `api-doc-generator`
+- 若项目有 HTTP API → 可选运行 `dev:api-doc-generator`
 - 任意任务失败立即停止并回报
 
 等待 subagent 完成。向用户展示构建结果。跳至**步骤 5**。
@@ -63,20 +63,20 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 
 ## 前后端分离路径
 
-### 步骤 3-B——启动 senior-developer-backend（sonnet）
+### 步骤 3-B——启动 dev:senior-developer-backend（sonnet）
 
-启动 `senior-developer-backend` subagent，显式指定 `model: "sonnet"`。
+启动 `dev:senior-developer-backend` subagent，显式指定 `model: "sonnet"`。
 
 该 subagent 将执行：
 - BUILD：读取 plan.md + todo_backend.md，按任务顺序逐项实现、验证并提交
-- 全部任务完成后自动运行 `api-doc-generator`，输出 `.artifacts/<yyyymmdd>/<任务简述>/api.md`
+- 全部任务完成后自动运行 `dev:api-doc-generator`，输出 `.artifacts/<yyyymmdd>/<任务简述>/api.md`
 - 任意任务失败立即停止并回报
 
 等待 subagent 完成。向用户展示后端构建结果和接口文档摘要。
 
-### 步骤 4-B——启动 senior-developer-frontend（sonnet）
+### 步骤 4-B——启动 dev:senior-developer-frontend（sonnet）
 
-后端构建完成且 `api.md` 生成后，启动 `senior-developer-frontend` subagent，显式指定 `model: "sonnet"`。
+后端构建完成且 `api.md` 生成后，启动 `dev:senior-developer-frontend` subagent，显式指定 `model: "sonnet"`。
 
 该 subagent 将执行：
 - BUILD：读取 `api.md`（后端接口文档）→ 读取 plan.md + todo_frontend.md → 逐任务实现
@@ -89,9 +89,9 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 
 ---
 
-## 步骤 5——启动 senior-reviewer（第一轮审查）
+## 步骤 5——启动 dev:senior-reviewer（第一轮审查）
 
-构建阶段全部完成后，启动 `senior-reviewer` subagent，显式指定 `model: "opus"`，传入以下信息：
+构建阶段全部完成后，启动 `dev:senior-reviewer` subagent，显式指定 `model: "opus"`，传入以下信息：
 - 构建阶段使用的 todo 文件路径（`todo.md` 或 `todo_backend.md` + `todo_frontend.md`）
 - 项目类型（单体/前后端分离）
 
@@ -111,9 +111,9 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 
 | 项目类型 | 修复 agent |
 |----------|-----------|
-| 单体项目 | `senior-developer`（sonnet） |
-| 前后端分离 — 仅有后端问题 | `senior-developer-backend`（sonnet） |
-| 前后端分离 — 仅有前端问题 | `senior-developer-frontend`（sonnet） |
+| 单体项目 | `dev:senior-developer`（sonnet） |
+| 前后端分离 — 仅有后端问题 | `dev:senior-developer-backend`（sonnet） |
+| 前后端分离 — 仅有前端问题 | `dev:senior-developer-frontend`（sonnet） |
 | 前后端分离 — 两端都有问题 | 先启动后端修复 agent，完成后再启动前端修复 agent |
 
 启动对应的 dev subagent，显式指定 `model: "sonnet"`，prompt 中包含：
@@ -125,7 +125,7 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 
 ## 步骤 7——重新审查验证
 
-再次启动 `senior-reviewer` subagent，显式指定 `model: "opus"`，传入：
+再次启动 `dev:senior-reviewer` subagent，显式指定 `model: "opus"`，传入：
 - `review.md` 路径（包含修复清单）
 - 模式标记：`re-review`
 
@@ -143,7 +143,7 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 
 | 用户意图 | 动作 |
 |----------|------|
-| "从 plan 开始" | 启动 `senior-developer-planner`，告知从 PLAN 入口 |
+| "从 plan 开始" | 启动 `dev:senior-developer-planner`，告知从 PLAN 入口 |
 | "直接构建后端" | 跳过步骤 1-2，直接执行步骤 3-B |
 | "直接构建前端" | 跳过步骤 1-2 和 3-B，直接执行步骤 4-B |
 | "直接审查" | 跳过所有构建步骤，直接执行步骤 5（第一轮审查） |
@@ -155,18 +155,18 @@ description: 串行流水线——启动 senior-developer-planner (opus) → 判
 ## Agent tool call 示例
 
 ```
-步骤 1: Agent(description="策划需求", subagent_type="senior-developer-planner", model="opus", prompt="...")
+步骤 1: Agent(description="策划需求", subagent_type="dev:senior-developer-planner", model="opus", prompt="...")
 
 单体路径：
-  步骤 3-A: Agent(description="实现代码", subagent_type="senior-developer", model="sonnet", prompt="...")
+  步骤 3-A: Agent(description="实现代码", subagent_type="dev:senior-developer", model="sonnet", prompt="...")
 
 前后端分离路径：
-  步骤 3-B: Agent(description="实现后端", subagent_type="senior-developer-backend", model="sonnet", prompt="...")
-  步骤 4-B: Agent(description="实现前端", subagent_type="senior-developer-frontend", model="sonnet", prompt="...")
+  步骤 3-B: Agent(description="实现后端", subagent_type="dev:senior-developer-backend", model="sonnet", prompt="...")
+  步骤 4-B: Agent(description="实现前端", subagent_type="dev:senior-developer-frontend", model="sonnet", prompt="...")
 
-步骤 5 (第一轮审查): Agent(description="审查代码", subagent_type="senior-reviewer", model="opus", prompt="...")
-步骤 6 (修复):       Agent(description="修复审查问题", subagent_type="senior-developer", model="sonnet", prompt="审查反馈修复: 读取 .artifacts/.../review.md，逐项修复并提交")
-步骤 7 (重新审查):   Agent(description="重新审查", subagent_type="senior-reviewer", model="opus", prompt="[re-review] 检查修复: review.md 路径为 .artifacts/.../review.md")
+步骤 5 (第一轮审查): Agent(description="审查代码", subagent_type="dev:senior-reviewer", model="opus", prompt="...")
+步骤 6 (修复):       Agent(description="修复审查问题", subagent_type="dev:senior-developer", model="sonnet", prompt="审查反馈修复: 读取 .artifacts/.../review.md，逐项修复并提交")
+步骤 7 (重新审查):   Agent(description="重新审查", subagent_type="dev:senior-reviewer", model="opus", prompt="[re-review] 检查修复: review.md 路径为 .artifacts/.../review.md")
 ```
 
 ## 规则

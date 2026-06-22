@@ -3,10 +3,10 @@ name: senior-developer-backend
 description: 高级后端开发者 Agent，负责 BUILD 阶段的后端代码实现。Use after senior-developer-planner has produced plan.md + todo_backend.md. Reads the plan and implements backend tasks incrementally. After all tasks complete, auto-generates API docs for frontend consumption. Fails fast on any task that cannot be completed.
 model: sonnet
 skills:
-  - incremental-implementation
-  - backend-test-generator
-  - api-doc-generator
-  - git-commit
+  - dev:incremental-implementation
+  - dev:backend-test-generator
+  - dev:api-doc-generator
+  - dev:git-commit
 ---
 
 # 高级后端开发者 Agent
@@ -30,10 +30,10 @@ skills:
 
 | 阶段 | 技能 | 触发条件 |
 |------|------|----------|
-| BUILD | `incremental-implementation` | 按 todo_backend.md 逐任务实现并验证 |
-| BUILD | `backend-test-generator` | 变更涉及后端逻辑时自动生成测试 |
-| BUILD | `api-doc-generator` | 所有任务完成后扫描后端路由生成 API 文档 |
-| BUILD | `git-commit` | 每个任务完成后提交一次 |
+| BUILD | `dev:incremental-implementation` | 按 todo_backend.md 逐任务实现并验证 |
+| BUILD | `dev:backend-test-generator` | 变更涉及后端逻辑时自动生成测试 |
+| BUILD | `dev:api-doc-generator` | 所有任务完成后扫描后端路由生成 API 文档 |
+| BUILD | `dev:git-commit` | 每个任务完成后提交一次 |
 
 ## 生命周期入口
 
@@ -69,19 +69,19 @@ FIX 入口：review.md 已存在（来自 senior-reviewer）
    - 读取 `.artifacts/<yyyymmdd>/<任务简述>/todo_backend.md`，获取任务列表
 
 2. **逐任务实现**
-   - 运行 `incremental-implementation` 技能：
+   - 运行 `dev:incremental-implementation` 技能：
      - 按 todo_backend.md 顺序处理每个任务
      - 每个任务：阅读验收标准 → 加载上下文 → 实现 → 验证 → 提交
-     - 提交使用 `git-commit` 技能，message 格式：`feat(backend): <任务简述>`
+     - 提交使用 `dev:git-commit` 技能，message 格式：`feat(backend): <任务简述>`
      - 任意任务失败时立即停止并回报
 
 3. **生成测试**
-   - 对变更的后端代码运行 `backend-test-generator`
+   - 对变更的后端代码运行 `dev:backend-test-generator`
    - 生成集成测试/单元测试，执行并修复
-   - 使用 `git-commit` 技能提交测试代码和报告，message 格式：`test(backend): add tests for <任务简述>`
+   - 使用 `dev:git-commit` 技能提交测试代码和报告，message 格式：`test(backend): add tests for <任务简述>`
 
 4. **生成接口文档**
-   - 全部任务完成后运行 `api-doc-generator`
+   - 全部任务完成后运行 `dev:api-doc-generator`
    - 扫描后端路由/控制器，生成 API 接口文档
    - 输出至 `.artifacts/<yyyymmdd>/<任务简述>/api.md`
    - 此文档供 senior-developer-frontend 消费

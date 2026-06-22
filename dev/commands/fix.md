@@ -10,9 +10,9 @@ description: 按 review.md 修复清单逐项修复代码
 
 | 场景 | agent |
 |------|-------|
-| 单体项目 | `senior-developer`（sonnet） |
-| 后端问题 | `senior-developer-backend`（sonnet） |
-| 前端问题 | `senior-developer-frontend`（sonnet） |
+| 单体项目 | `dev:senior-developer`（sonnet） |
+| 后端问题 | `dev:senior-developer-backend`（sonnet） |
+| 前端问题 | `dev:senior-developer-frontend`（sonnet） |
 
 启动 agent 时传入：
 - `review.md` 路径

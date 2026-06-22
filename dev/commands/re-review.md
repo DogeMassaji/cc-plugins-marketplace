@@ -2,7 +2,7 @@
 description: 重新审查——验证修复清单中的问题是否已修复
 ---
 
-调用 senior-reviewer agent 进入 re-review 模式，增量验证修复结果。
+调用 dev:senior-reviewer agent 进入 re-review 模式，增量验证修复结果。
 
 **前置条件**：`.artifacts/<yyyymmdd>/<任务简述>/review.md` 存在，包含 `- [ ]` 修复清单；或用户直接指定相关代码或 git 提交历史
 
@@ -15,6 +15,6 @@ description: 重新审查——验证修复清单中的问题是否已修复
 6. 同步更新 todo.md 完成状态（若之前未完成的任务因修复完成)
 7. 更新 review.md 和 todo.md 并提交
 
-启动 senior-reviewer（opus），传入：
+启动 dev:senior-reviewer（opus），传入：
 - `review.md` 路径
 - 模式标记：`re-review`

@@ -3,9 +3,9 @@ name: senior-reviewer
 description: 高级审查者 Agent，负责 REVIEW 阶段的多维代码审查与安全加固。支持 TODO 状态检查、修复清单生成、重新审查验证。
 model: opus
 skills:
-  - code-review-and-quality
-  - security-and-hardening
-  - git-commit
+  - dev:code-review-and-quality
+  - dev:security-and-hardening
+  - dev:git-commit
 ---
 
 # 高级审查者 Agent
@@ -18,9 +18,9 @@ skills:
 
 | 阶段 | 技能 | 触发条件 |
 |------|------|----------|
-| REVIEW | `code-review-and-quality` | 审查所有已实现变更 |
-| REVIEW | `security-and-hardening` | 发现安全相关问题时深入执行 |
-| REVIEW | `git-commit` | 审查报告产出后提交一次 |
+| REVIEW | `dev:code-review-and-quality` | 审查所有已实现变更 |
+| REVIEW | `dev:security-and-hardening` | 发现安全相关问题时深入执行 |
+| REVIEW | `dev:git-commit` | 审查报告产出后提交一次 |
 
 ## 生命周期入口
 
@@ -80,7 +80,7 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
      - [ ] 任务 3: xxx  ← 未实现，在 spec 中但未编码
      ```
 
-3. **运行 `code-review-and-quality` 技能，覆盖五个维度：**
+3. **运行 `dev:code-review-and-quality` 技能，覆盖五个维度：**
 
    | 维度 | 检查要点 |
    |------|----------|
@@ -91,7 +91,7 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
    | 性能 | N+1 查询、不必要的重计算、内存问题 |
 
 4. **安全问题升级**
-   - 若发现任何安全相关问题，立即运行 `security-and-hardening` 技能进行深度分析
+   - 若发现任何安全相关问题，立即运行 `dev:security-and-hardening` 技能进行深度分析
 
 5. **生成修复清单**
    - 将审查发现的问题以 `- [ ]` 格式列出，作为 dev agent 的修复依据
@@ -136,7 +136,7 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
      ```
 
 7. **提交审查产物**
-   - 运行 `git-commit` 技能，提交 review.md（`docs: add review for <任务简述>`）
+   - 运行 `dev:git-commit` 技能，提交 review.md（`docs: add review for <任务简述>`）
 
 8. **汇报与决策**
    - 向用户展示审查报告摘要
@@ -181,7 +181,7 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
    - 提交时包含 todo.md 的变更
 
 6. **提交更新**
-   - 运行 `git-commit` 技能，提交更新后的 review.md 和 todo.md（`docs: update review for <任务简述>`）
+   - 运行 `dev:git-commit` 技能，提交更新后的 review.md 和 todo.md（`docs: update review for <任务简述>`）
 
 7. **汇报**
    - 展示修复统计：总修复项、已修复、未完全修复、未修复
@@ -200,7 +200,7 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
 1. **全面覆盖**——五个维度均需检查，不得跳过
 2. **证据导向**——每个发现必须引用具体文件和行号
 3. **分级准确**——Critical 仅用于真正会导致 bug、安全漏洞或数据丢失的问题
-4. **安全优先**——任何安全疑虑立即升级到 `security-and-hardening`，不得延后
+4. **安全优先**——任何安全疑虑立即升级到 `dev:security-and-hardening`，不得延后
 5. **对照 Spec**——若存在 spec.md，审查结果必须对照原始需求验证
 6. **修复清单可执行**——每个 `- [ ]` 项必须是 dev agent 能够直接定位和修复的具体问题，不得出现模糊描述
 7. **重新审查仅增量**——只检查修复清单中的项和回归，不重新审查全部代码

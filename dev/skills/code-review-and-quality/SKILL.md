@@ -54,7 +54,7 @@ description: Conducts multi-axis code review. Use before merging any change. Use
 
 ### 4. 安全性
 
-详细安全指导见 `security-and-hardening`。变更是否引入漏洞？
+详细安全指导见 `dev:security-and-hardening`。变更是否引入漏洞？
 
 - 用户输入是否验证和清理？
 - 密钥是否不暴露在代码、日志和版本控制中？

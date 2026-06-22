@@ -159,7 +159,7 @@ SPECIFY ──→ PLAN ──→ TASKS ──→ IMPLEMENT
 
 ### 阶段 4：Implement
 
-一次一个任务，遵循 `skills/incremental-implementation/SKILL.md`（`incremental-implementation`）执行。
+一次一个任务，遵循 `skills/incremental-implementation/SKILL.md`（`dev:incremental-implementation`）执行。
 
 ## 保持 Spec 更新
 
