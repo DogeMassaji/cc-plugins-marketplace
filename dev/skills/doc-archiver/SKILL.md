@@ -1,6 +1,6 @@
 ---
 name: doc-archiver
-description: 按照编号目录+中文描述文件名规范归档整理项目文档。支持创建新文档、整理现有文档、废弃旧文档、维护 TODO 清单。触发条件：用户说"归档文档"、"整理文档"、"写文档"、"创建文档"、"文档归档"、"废弃文档"、"更新 TODO"。
+description: Archives project documents following numbered directory + Chinese filename convention. Supports creating new docs, organizing existing docs, deprecating old docs, and maintaining TODO lists. Triggers: user says "archive docs", "organize docs", "write documentation", "create doc", "deprecate doc", "update TODO".
 ---
 
 # 文档归档整理器

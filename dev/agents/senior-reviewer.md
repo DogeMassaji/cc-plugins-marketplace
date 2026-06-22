@@ -1,6 +1,6 @@
 ---
 name: senior-reviewer
-description: 高级审查者 Agent，负责 REVIEW 阶段的多维代码审查与安全加固。支持 TODO 状态检查、修复清单生成、重新审查验证。
+description: Senior reviewer agent responsible for multi-axis code review and security hardening during REVIEW phase. Supports TODO status checking, fix checklist generation, and re-review verification.
 model: opus
 skills:
   - dev:code-review-and-quality

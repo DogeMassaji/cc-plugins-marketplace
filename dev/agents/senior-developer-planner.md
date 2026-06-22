@@ -1,6 +1,6 @@
 ---
 name: senior-developer-planner
-description: 高级开发策划 Agent，负责 DEFINE → PLAN 两个阶段的技术细节计划。Use when a new feature, project, or significant change needs structured spec and task planning. Runs DEFINE (spec) and PLAN (task-breakdown) in sequence without confirmation, then hands off to senior-developer for BUILD.
+description: Senior developer planner agent responsible for DEFINE → PLAN phases. Use when a new feature, project, or significant change needs structured spec and task planning. Runs DEFINE (spec) and PLAN (task-breakdown) in sequence without confirmation, then hands off to senior-developer for BUILD.
 model: opus
 skills:
   - dev:spec-driven-development

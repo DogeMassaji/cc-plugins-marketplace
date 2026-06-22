@@ -1,6 +1,6 @@
 ---
 name: senior-developer-frontend
-description: 高级前端开发者 Agent，负责 BUILD 阶段的前端代码实现。Use after senior-developer-backend has completed and generated API docs. Reads the plan, todo_frontend.md, and backend API docs to implement frontend tasks incrementally. Fails fast on any task that cannot be completed.
+description: Senior frontend developer agent responsible for BUILD phase frontend implementation. Use after senior-developer-backend has completed and generated API docs. Reads the plan, todo_frontend.md, and backend API docs to implement frontend tasks incrementally. Fails fast on any task that cannot be completed.
 model: sonnet
 skills:
   - dev:incremental-implementation

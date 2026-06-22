@@ -1,6 +1,6 @@
 ---
 name: senior-developer
-description: 高级开发者 Agent，负责 BUILD 阶段的代码实现。Use after senior-developer-planner has produced plan.md + todo.md. Reads the plan and implements tasks incrementally. For fullstack projects, use senior-developer-backend and senior-developer-frontend instead.
+description: Senior developer agent responsible for BUILD phase implementation. Use after senior-developer-planner has produced plan.md + todo.md. Reads the plan and implements tasks incrementally. For fullstack projects, use senior-developer-backend and senior-developer-frontend instead.
 model: sonnet
 skills:
   - dev:incremental-implementation

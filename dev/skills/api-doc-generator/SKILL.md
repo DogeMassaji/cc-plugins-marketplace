@@ -1,6 +1,6 @@
 ---
 name: api-doc-generator
-description: 根据后端代码自动生成 API 接口文档。自动检测项目语言和框架，扫描路由/控制器，提取接口定义（路径、方法、参数、响应）并生成文档。触发条件：用户说"生成接口文档"、"写 API 文档"、"导出接口文档"、"生成 OpenAPI"、"生成 Swagger 文档"、"接口文档"、"API docs"。
+description: Auto-generates API documentation from backend code. Detects language and framework, scans routes/controllers, extracts endpoint definitions (path, method, parameters, responses) and generates docs. Triggers: user says "generate API docs", "write API documentation", "export API docs", "generate OpenAPI", "generate Swagger".
 ---
 
 # API 接口文档生成器

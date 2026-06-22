@@ -1,6 +1,6 @@
 ---
 name: backend-test-generator
-description: 根据代码变更自动生成后端测试用例。自动检测项目语言和测试框架，生成集成测试/单元测试，执行测试并输出报告。触发条件：用户说"生成测试"、"写测试用例"、"跑测试"、"测试报告"、"给 X 写单测"、"写后端测试"。
+description: Auto-generates backend test cases based on code changes. Detects language and test framework, generates integration/unit tests, executes tests and outputs reports. Triggers: user says "generate tests", "write test cases", "run tests", "test report", "write unit tests for X".
 ---
 
 # 后端测试生成器
