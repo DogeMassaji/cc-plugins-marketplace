@@ -76,8 +76,10 @@ FIX 入口：review.md 已存在（来自 reviewer）
      - 提交使用 `dev:git-commit` 技能，message 格式：`feat: <任务简述>`
      - 任意任务失败时立即停止并回报
 
-3. **生成测试**（若涉及后端逻辑）
-   - 运行 `dev:backend-test-generator` 生成测试
+3. **生成测试**（若涉及后端逻辑且未明确要求跳过）
+   - 检查 prompt 中是否有 "跳过测试生成" 或 "skip test generation" 标记
+   - 若有则跳过，不生成测试代码
+   - 若无则运行 `dev:backend-test-generator` 生成测试
    - 使用 `dev:git-commit` 技能提交测试代码和报告，message 格式：`test: add tests for <任务简述>`
 
 4. **汇报结果**
