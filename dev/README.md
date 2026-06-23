@@ -6,7 +6,15 @@
 
 ---
 
-## 命令
+## 三模式流水线
+
+| 命令 | 模式 | 规模 | 流程 |
+|------|------|------|------|
+| `/popping` | **S** | ≤50 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
+| `/locking` | **M** | 50-200 LOC | 策划者 → 全栈工程师 → 初级审查者 → 全栈工程师修复（SPEC → PLAN → BUILD → REVIEW → FIX） |
+| `/breaking` | **L** | >200 LOC | 策划者 → 构建（支持前后端分离）→ 高级审查者 → 修复 → 重新审查 |
+
+## 单阶段命令
 
 | 命令 | 阶段 | 说明 |
 |------|------|------|
@@ -14,10 +22,10 @@
 | `/plan` | Plan | 拆分为可验证的小任务 |
 | `/build` | Build | 增量实现 |
 | `/review` | Review | 五轴代码审查 |
+| `/check` | Check | 快速预检——编译+安全+规范扫描（只读） |
 | `/fix` | Fix | 按审查清单修复 |
 | `/re-review` | Re-Review | 验证修复结果 |
 | `/doc` | Doc | 文档归档整理 |
-| `/workflow` | 全流程 | 串行：planner → backend → frontend → reviewer → fix → re-review |
 
 ---
 
@@ -51,25 +59,27 @@
 
 ---
 
+## 全部 6 个 Agent
+
+| Agent | model | 职责 |
+|-------|-------|------|
+| `senior-developer-planner` | opus | DEFINE + PLAN 策划 |
+| `full-stack-engineer` | sonnet | BUILD 全栈实现 |
+| `senior-developer-backend` | sonnet | BUILD 后端实现 |
+| `senior-developer-frontend` | sonnet | BUILD 前端实现 |
+| `junior-reviewer` | sonnet | 单轮 REVIEW（S/M 模式） |
+| `senior-reviewer` | opus | 完整 REVIEW + RE-REVIEW（L 模式） |
+
+---
+
 ## 项目结构
 
 ```
 skills/                    # 11 个 Skill（每目录一个 SKILL.md）
-├── interview-me/
-├── spec-driven-development/
-├── planning-and-task-breakdown/
-├── incremental-implementation/
-├── backend-test-generator/
-├── api-doc-generator/
-├── code-review-and-quality/
-├── security-and-hardening/
-├── using-agent-skills/
-├── git-commit/
-└── doc-archiver/
-commands/                  # 8 个 Slash Command
+agents/                    # 6 个专职 Agent
+commands/                  # 11 个 Slash Command
 references/                # 安全检查清单
 hooks/                     # Session 生命周期 Hooks
-agents/                    # 5 个专职 Agent（planner, developer, backend, frontend, reviewer）
 docs/                      # skill-anatomy 格式说明 + 快速入门
 ```
 

@@ -10,7 +10,7 @@ description: 按 review.md 修复清单逐项修复代码
 
 | 场景 | agent |
 |------|-------|
-| 单体项目 | `dev:senior-developer`（sonnet） |
+| 单体项目 | `dev:full-stack-engineer`（sonnet） |
 | 后端问题 | `dev:senior-developer-backend`（sonnet） |
 | 前端问题 | `dev:senior-developer-frontend`（sonnet） |
 

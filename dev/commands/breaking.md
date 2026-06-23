@@ -1,14 +1,14 @@
 ---
-description: 串行流水线——启动 dev:senior-developer-planner (opus) → 判断项目类型 → 按单体/前后端分离两条路径执行构建 → dev:senior-reviewer (opus) → 修复 → 重新审查验证
+description: Breaking 流水线（L 模式）——大型变更完整交付：策划者 (opus) → 判断项目类型 → 按单体/前后端分离两条路径执行构建 → 高级审查者 (opus) → 修复 → 重新审查验证
 ---
 
-调用专职 subagent 完成完整开发流水线，每个 subagent 显式指定 model 参数：
+Breaking — 全力输出。L 模式（大型变更 >200 LOC）完整流水线。调用专职 subagent 完成全部阶段，含修复-审查循环（上限 2 轮）。
 
 | 步骤 | Agent | model | 阶段 |
 |------|-------|-------|------|
 | 1 | `dev:senior-developer-planner` | `opus` | DEFINE → PLAN |
 | 2 | — | — | 判断项目类型（读取产物） |
-| 3-A | `dev:senior-developer` | `sonnet` | BUILD（单体） |
+| 3-A | `dev:full-stack-engineer` | `sonnet` | BUILD（单体） |
 | 3-B | `dev:senior-developer-backend` | `sonnet` | BUILD（后端） |
 | — | 产出 `api.md` | — | 接口文档 |
 | 4-B | `dev:senior-developer-frontend` | `sonnet` | BUILD（前端） |
@@ -17,6 +17,13 @@ description: 串行流水线——启动 dev:senior-developer-planner (opus) →
 | 7 | `dev:senior-reviewer`（重新审查） | `opus` | RE-REVIEW → 验证修复 → 更新 TODO 状态 |
 
 **产物归档：** 所有阶段产物统一存放在 `.artifacts/<yyyymmdd>/<任务简述>/` 目录下。
+
+**适用场景：**
+- >200 LOC 变更
+- 多模块、架构级变更
+- 新功能开发
+- 前后端分离项目
+- 需要严格修复-验证循环
 
 ---
 
@@ -48,9 +55,9 @@ description: 串行流水线——启动 dev:senior-developer-planner (opus) →
 
 ## 单体项目路径
 
-### 步骤 3-A——启动 dev:senior-developer（sonnet）
+### 步骤 3-A——启动 dev:full-stack-engineer（sonnet）
 
-启动 `dev:senior-developer` subagent，显式指定 `model: "sonnet"`。
+启动 `dev:full-stack-engineer` subagent，显式指定 `model: "sonnet"`。
 
 该 subagent 将执行：
 - BUILD：读取 plan.md + todo.md，按任务顺序逐项实现、验证并提交
@@ -111,7 +118,7 @@ description: 串行流水线——启动 dev:senior-developer-planner (opus) →
 
 | 项目类型 | 修复 agent |
 |----------|-----------|
-| 单体项目 | `dev:senior-developer`（sonnet） |
+| 单体项目 | `dev:full-stack-engineer`（sonnet） |
 | 前后端分离 — 仅有后端问题 | `dev:senior-developer-backend`（sonnet） |
 | 前后端分离 — 仅有前端问题 | `dev:senior-developer-frontend`（sonnet） |
 | 前后端分离 — 两端都有问题 | 先启动后端修复 agent，完成后再启动前端修复 agent |
@@ -158,14 +165,14 @@ description: 串行流水线——启动 dev:senior-developer-planner (opus) →
 步骤 1: Agent(description="策划需求", subagent_type="dev:senior-developer-planner", model="opus", prompt="...")
 
 单体路径：
-  步骤 3-A: Agent(description="实现代码", subagent_type="dev:senior-developer", model="sonnet", prompt="...")
+  步骤 3-A: Agent(description="实现代码", subagent_type="dev:full-stack-engineer", model="sonnet", prompt="...")
 
 前后端分离路径：
   步骤 3-B: Agent(description="实现后端", subagent_type="dev:senior-developer-backend", model="sonnet", prompt="...")
   步骤 4-B: Agent(description="实现前端", subagent_type="dev:senior-developer-frontend", model="sonnet", prompt="...")
 
 步骤 5 (第一轮审查): Agent(description="审查代码", subagent_type="dev:senior-reviewer", model="opus", prompt="...")
-步骤 6 (修复):       Agent(description="修复审查问题", subagent_type="dev:senior-developer", model="sonnet", prompt="审查反馈修复: 读取 .artifacts/.../review.md，逐项修复并提交")
+步骤 6 (修复):       Agent(description="修复审查问题", subagent_type="dev:full-stack-engineer", model="sonnet", prompt="审查反馈修复: 读取 .artifacts/.../review.md，逐项修复并提交")
 步骤 7 (重新审查):   Agent(description="重新审查", subagent_type="dev:senior-reviewer", model="opus", prompt="[re-review] 检查修复: review.md 路径为 .artifacts/.../review.md")
 ```
 

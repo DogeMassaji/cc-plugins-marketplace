@@ -4,7 +4,17 @@
 
 ---
 
-## 一、命令总览（8 个）
+## 一、命令总览（11 个）
+
+### 三模式流水线
+
+| 命令 | 模式 | 规模 | 流程 | 审查者 |
+|------|------|------|------|--------|
+| `/popping` | S | ≤50 LOC | BUILD → REVIEW → FIX（单轮） | junior-reviewer (sonnet) |
+| `/locking` | M | 50-200 LOC | SPEC → PLAN → BUILD → REVIEW → FIX（单轮） | junior-reviewer (sonnet) |
+| `/breaking` | L | >200 LOC | SPEC → PLAN → BUILD → REVIEW → FIX → RE-REVIEW（含循环） | senior-reviewer (opus) |
+
+### 单阶段命令
 
 | 命令 | 开发阶段 | 核心 Skill | 辅助 Skill |
 |------|----------|-----------|-----------|
@@ -12,14 +22,35 @@
 | `/plan` | Plan | `dev:planning-and-task-breakdown` | — |
 | `/build` | Build | `dev:incremental-implementation` | — |
 | `/review` | Review | `dev:code-review-and-quality` | `dev:security-and-hardening` |
+| `/check` | Check | 只读快速扫描 | 编译检查、安全扫描、规范检查 |
 | `/fix` | Fix | `dev:incremental-implementation` | 按 review.md 清单逐项修复 |
 | `/re-review` | Re-Review | `dev:code-review-and-quality` | 增量验证修复清单 |
 | `/doc` | Doc | `dev:doc-archiver` | 归档/整理项目文档 |
-| `/workflow` | 全流程 | 串行编排：planner (opus) → backend (sonnet) → api.md → frontend (sonnet) → reviewer (opus) → fix → re-review | 前后端分离时后端先完成再前端 |
 
 ---
 
 ## 二、命令详情
+
+### `/popping` — Popping 流水线（S 模式）
+
+小变更快速交付。全栈工程师实现 → 初级审查者单轮审查。
+
+- 命令：`commands/popping.md`
+- Agent：`dev:full-stack-engineer` (sonnet) → `dev:junior-reviewer` (sonnet)
+
+### `/locking` — Locking（M 模式）
+
+标准变更交付。策划者策划 → 全栈工程师实现 → 初级审查者审查 → 全栈工程师修复。
+
+- 命令：`commands/locking.md`
+- Agent：`dev:senior-developer-planner` (opus) → `dev:full-stack-engineer` (sonnet) → `dev:junior-reviewer` (sonnet) → `dev:full-stack-engineer` (sonnet)
+
+### `/breaking` — Breaking 流水线（L 模式）
+
+大型变更完整交付。策划 → 构建（支持前后端分离）→ 高级审查 → 修复 → 重新审查。
+
+- 命令：`commands/breaking.md`
+- Agent：planner (opus) → build (sonnet) → senior-reviewer (opus) → fix (sonnet) → re-review (opus)
 
 ### `/spec` — 编写结构化 Spec 说明
 
@@ -55,6 +86,18 @@
 - 命令：`commands/review.md`
 - Skill：`skills/code-review-and-quality/SKILL.md`
 
+### `/check` — 快速预检（只读）
+
+1. 读取 git diff（已暂存或最近提交）
+2. 编译/类型检查（如适用）
+3. 快速安全扫描（硬编码密钥、SQL 注入、未验证输入）
+4. 基本规范检查
+5. 终端直接输出，不生成产物文件
+
+- 命令：`commands/check.md`
+- 模型：haiku（轻量快速）
+- 级别：🔴 阻塞 / 🟡 警告 / ℹ️ 建议
+
 ### `/fix` — 按审查清单修复
 
 1. 读取 `review.md` 中的修复清单
@@ -78,16 +121,6 @@
 3. 支持创建、整理、废弃、TODO 维护
 
 - 命令：`commands/doc.md`
-
-### `/workflow` — 串行全流程流水线
-
-前后端分离：`dev:senior-developer-planner` (opus: DEFINE → PLAN) → `dev:senior-developer-backend` (sonnet: BUILD 后端) → 产出 `api.md` → `dev:senior-developer-frontend` (sonnet: BUILD 前端 → 消费 api.md) → `dev:senior-reviewer` (opus: REVIEW) → FIX → RE-REVIEW。后端先完成并生成接口文档，前端基于真实文档实现。
-
-单体项目：`dev:senior-developer-planner` → `dev:senior-developer` → `dev:senior-reviewer` → FIX → RE-REVIEW。
-
-每个 subagent 调用时显式指定 `model` 参数，不依赖 frontmatter。所有产物归档到 `.artifacts/<yyyymmdd>/<任务简述>/`。支持跳过入口：从 plan / build-backend / build-frontend / review 直接开始。修复-审查循环上限 2 轮。
-
-- 命令：`commands/workflow.md`
 
 ---
 
@@ -133,36 +166,54 @@
 
 ---
 
-## 六、生命周期
+## 六、Agent 清单（6 个）
 
-```
-DEFINE   → /spec      → dev:spec-driven-development
-         → (描述需求)  → dev:interview-me
-PLAN     → /plan      → dev:planning-and-task-breakdown
-BUILD    → /build     → dev:incremental-implementation
-REVIEW   → /review    → dev:code-review-and-quality + dev:security-and-hardening
-FIX      → /fix       → 按 review.md 清单逐项修复
-RE-REVIEW→ /re-review → 增量验证修复结果
-DOC      → /doc       → dev:doc-archiver
-```
-
-快捷方式：`/workflow` 提供 dev:senior-developer-planner (opus) → dev:senior-developer-backend (sonnet) → api.md → dev:senior-developer-frontend (sonnet) → dev:senior-reviewer (opus) → fix → re-review 串行编排（前后端分离），或单体项目 dev:senior-developer-planner → dev:senior-developer → dev:senior-reviewer。
+| Agent | model | 职责 |
+|-------|-------|------|
+| `dev:senior-developer-planner` | opus | DEFINE + PLAN 策划 |
+| `dev:full-stack-engineer` | sonnet | BUILD 全栈实现 |
+| `dev:senior-developer-backend` | sonnet | BUILD 后端实现 |
+| `dev:senior-developer-frontend` | sonnet | BUILD 前端实现 |
+| `dev:junior-reviewer` | sonnet | 单轮 REVIEW（S/M 模式） |
+| `dev:senior-reviewer` | opus | 完整 REVIEW + RE-REVIEW（L 模式） |
 
 ---
 
-## 七、文件索引
+## 七、生命周期
+
+```
+S: POPPING  → /popping  → full-stack-engineer (sonnet) → junior-reviewer (sonnet) → full-stack-engineer (sonnet)
+M: LOCKING  → /locking  → planner (opus) → full-stack-engineer (sonnet) → junior-reviewer (sonnet) → full-stack-engineer (sonnet)
+L: BREAKING → /breaking → planner (opus) → build (sonnet) → senior-reviewer (opus) → fix → re-review
+DEFINE      → /spec     → dev:spec-driven-development
+            → (描述需求) → dev:interview-me
+PLAN        → /plan     → dev:planning-and-task-breakdown
+BUILD       → /build    → dev:incremental-implementation
+REVIEW      → /review   → dev:code-review-and-quality + dev:security-and-hardening
+CHECK       → /check    → 只读快速扫描（编译+安全+规范）
+FIX         → /fix      → 按 review.md 清单逐项修复
+RE-REVIEW   → /re-review → 增量验证修复结果
+DOC         → /doc      → dev:doc-archiver
+```
+
+---
+
+## 八、文件索引
 
 ### 命令定义
 | 文件 | 说明 |
 |------|------|
+| `commands/popping.md` | `/popping` — S 模式 |
+| `commands/locking.md` | `/locking` — M 模式 |
+| `commands/breaking.md` | `/breaking` — L 模式 |
 | `commands/spec.md` | `/spec` |
 | `commands/plan.md` | `/plan` |
 | `commands/build.md` | `/build` |
 | `commands/review.md` | `/review` |
+| `commands/check.md` | `/check` |
 | `commands/fix.md` | `/fix` |
 | `commands/re-review.md` | `/re-review` |
 | `commands/doc.md` | `/doc` |
-| `commands/workflow.md` | `/workflow` |
 
 ### Skill 定义
 | 文件 | 阶段 |
@@ -178,6 +229,16 @@ DOC      → /doc       → dev:doc-archiver
 | `skills/git-commit/SKILL.md` | Meta |
 | `skills/doc-archiver/SKILL.md` | Meta |
 | `skills/using-agent-skills/SKILL.md` | Meta |
+
+### Agent 定义
+| 文件 | model |
+|------|-------|
+| `agents/senior-developer-planner.md` | opus |
+| `agents/full-stack-engineer.md` | sonnet |
+| `agents/senior-developer-backend.md` | sonnet |
+| `agents/senior-developer-frontend.md` | sonnet |
+| `agents/junior-reviewer.md` | sonnet |
+| `agents/senior-reviewer.md` | opus |
 
 ### Hooks
 | 文件 | 说明 |
