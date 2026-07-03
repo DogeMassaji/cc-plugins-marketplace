@@ -29,13 +29,13 @@ skills:
 ```
 REVIEW 入口：构建已完成
               → 读取 git diff 或最近提交
-              → 读取 todo.md/todo_backend.md/todo_frontend.md 标注完成状态
-              → 读取 .artifacts/<yyyymmdd>/<任务简述>/spec.md 对比需求
+              → 读取 TODO.md/TODO_BACKEND.md/TODO_FRONTEND.md 标注完成状态
+              → 读取 .artifacts/<yyyymmdd>/<任务简述>/SPEC.md 对比需求
               → 执行 code-review-and-quality 技能
               → 若发现安全问题，深入执行 security-and-hardening 技能
               → 生成 review.md（含 TODO 状态 + 修复清单）
-              → 更新 todo.md 完成状态标记
-              → 提交 review.md + todo.md
+              → 更新 TODO.md 完成状态标记
+              → 提交 review.md + TODO.md
 ```
 
 ### 重新审查入口
@@ -46,8 +46,8 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
               → 逐项检查修复是否到位
               → 检查是否有回归问题
               → 更新 review.md（标注 [x] 或备注）
-              → 同步更新 todo.md 完成状态
-              → 提交更新后的 review.md + todo.md
+              → 同步更新 TODO.md 完成状态
+              → 提交更新后的 review.md + TODO.md
 ```
 
 ## 执行流程
@@ -56,13 +56,13 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
 
 1. **读取上下文**
    - 读取 git diff 或最近提交的变更范围
-   - 若存在 `.artifacts/<yyyymmdd>/<任务简述>/spec.md`，读取以对比需求
-   - 读取 TODO 文件（`todo.md` / `todo_backend.md` / `todo_frontend.md`），确认所有任务状态
+   - 若存在 `.artifacts/<yyyymmdd>/<任务简述>/SPEC.md`，读取以对比需求
+   - 读取 TODO 文件（`TODO.md` / `TODO_BACKEND.md` / `TODO_FRONTEND.md`），确认所有任务状态
 
 2. **TODO 状态检查**
    - 遍历 TODO 文件中的每个任务项，对照 git diff 判断完成情况
    - 在 review.md 的 TODO 状态章节写入状态表
-   - **同时更新原始 todo.md 文件**（或 todo_backend.md / todo_frontend.md），在每个任务项前标注状态标记：
+   - **同时更新原始 TODO.md 文件**（或 TODO_BACKEND.md / TODO_FRONTEND.md），在每个任务项前标注状态标记：
 
      ```markdown
      ## review.md — TODO 状态章节
@@ -74,7 +74,7 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
      ```
 
      ```markdown
-     ## todo.md 更新示例（直接修改文件）
+     ## TODO.md 更新示例（直接修改文件）
      - [x] 任务 1: xxx  ← 已实现，review 通过
      - [ ] 任务 2: xxx  ← 部分实现，缺少边界处理
      - [ ] 任务 3: xxx  ← 未实现，在 spec 中但未编码
@@ -176,16 +176,16 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
    - 全部修复 → 裁决改为 `批准`
    - 仍有未修复项 → 保持 `请求修改`，更新摘要
 
-5. **同步更新 todo.md**
-   - 若之前标记为 ⚠️ 或 ❌ 的任务因修复得以完成，更新 todo.md 中对应项为 `[x]`
-   - 提交时包含 todo.md 的变更
+5. **同步更新 TODO.md**
+   - 若之前标记为 ⚠️ 或 ❌ 的任务因修复得以完成，更新 TODO.md 中对应项为 `[x]`
+   - 提交时包含 TODO.md 的变更
 
 6. **提交更新**
-   - 运行 `dev:git-commit` 技能，提交更新后的 review.md 和 todo.md（`docs: update review for <任务简述>`）
+   - 运行 `dev:git-commit` 技能，提交更新后的 review.md 和 TODO.md（`docs: update review for <任务简述>`）
 
 7. **汇报**
    - 展示修复统计：总修复项、已修复、未完全修复、未修复
-   - 展示 todo.md 更新摘要
+   - 展示 TODO.md 更新摘要
    - 若仍有未修复项，由上游 workflow 决定是否进入第二轮修复循环
 
 ## 产物归档
@@ -201,7 +201,7 @@ RE-REVIEW 入口：修复已完成，传入 review.md 路径 + 模式标记 re-r
 2. **证据导向**——每个发现必须引用具体文件和行号
 3. **分级准确**——Critical 仅用于真正会导致 bug、安全漏洞或数据丢失的问题
 4. **安全优先**——任何安全疑虑立即升级到 `dev:security-and-hardening`，不得延后
-5. **对照 Spec**——若存在 spec.md，审查结果必须对照原始需求验证
+5. **对照 Spec**——若存在 SPEC.md，审查结果必须对照原始需求验证
 6. **修复清单可执行**——每个 `- [ ]` 项必须是 dev agent 能够直接定位和修复的具体问题，不得出现模糊描述
 7. **重新审查仅增量**——只检查修复清单中的项和回归，不重新审查全部代码
 8. **TODO 状态属实**——对照实际代码标注，不能仅凭提交记录判断

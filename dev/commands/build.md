@@ -4,7 +4,7 @@ description: 增量实现下一个任务——编码、验证、提交
 
 调用 dev:incremental-implementation skill。
 
-从 `.artifacts/<yyyymmdd>/<任务简述>/todo.md` 中选取下一个待办任务。对每个任务：
+从 `.artifacts/<yyyymmdd>/<任务简述>/TODO.md` 中选取下一个待办任务。对每个任务：
 
 1. 阅读任务的验收标准
 2. 加载相关上下文（已有代码、模式、类型）

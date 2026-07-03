@@ -23,9 +23,9 @@
   ],
   "commands": [
     "./commands/build.md",
-    "./commands/plan.md",
+    "./commands/PLAN.md",
     "./commands/review.md",
-    "./commands/spec.md",
+    "./commands/SPEC.md",
     "./commands/breaking.md",
     "./commands/fix.md",
     "./commands/re-review.md",
@@ -35,10 +35,10 @@
     "./commands/check.md"
   ],
   "agents": [
-    "./agents/senior-developer-planner.md",
-    "./agents/full-stack-engineer.md",
-    "./agents/senior-developer-frontend.md",
-    "./agents/senior-developer-backend.md",
+    "./agents/senior-developer.md",
+    "./agents/full-stack-developer.md",
+    "./agents/frontend-developer.md",
+    "./agents/backend-developer.md",
     "./agents/senior-reviewer.md",
     "./agents/junior-reviewer.md"
   ]

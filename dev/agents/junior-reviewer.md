@@ -30,13 +30,13 @@ skills:
 
 1. **读取上下文**
    - 读取 git diff 或最近提交的变更范围
-   - 若存在 `.artifacts/<yyyymmdd>/<任务简述>/spec.md`，读取以对比需求
-   - 若存在 TODO 文件（`todo.md` / `todo_backend.md` / `todo_frontend.md`），确认任务完成状态
+   - 若存在 `.artifacts/<yyyymmdd>/<任务简述>/SPEC.md`，读取以对比需求
+   - 若存在 TODO 文件（`TODO.md` / `TODO_BACKEND.md` / `TODO_FRONTEND.md`），确认任务完成状态
 
 2. **TODO 状态检查**（若存在 todo 文件）
    - 遍历 TODO 文件中的每个任务项，对照 git diff 判断完成情况
    - 在 review.md 的 TODO 状态章节写入状态表
-   - 同步更新原始 todo.md 文件中的完成标记（`[x]` / `[ ]`）
+   - 同步更新原始 TODO.md 文件中的完成标记（`[x]` / `[ ]`）
 
 3. **运行 `dev:code-review-and-quality` 技能，覆盖五个维度：**
 
@@ -93,7 +93,7 @@ skills:
      ```
 
 7. **提交审查产物**
-   - 运行 `dev:git-commit` 技能，提交 review.md（若 todo.md 有更新一并提交）
+   - 运行 `dev:git-commit` 技能，提交 review.md（若 TODO.md 有更新一并提交）
 
 8. **汇报**
    - 向用户展示审查报告摘要

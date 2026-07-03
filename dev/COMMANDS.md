@@ -36,14 +36,14 @@
 小变更快速交付。全栈工程师实现 → 初级审查者单轮审查。
 
 - 命令：`commands/popping.md`
-- Agent：`dev:full-stack-engineer` (sonnet) → `dev:junior-reviewer` (sonnet)
+- Agent：`dev:full-stack-developer` (sonnet) → `dev:junior-reviewer` (sonnet)
 
 ### `/locking` — Locking（M 模式）
 
 标准变更交付。策划者策划 → 全栈工程师实现 → 初级审查者审查 → 全栈工程师修复。
 
 - 命令：`commands/locking.md`
-- Agent：`dev:senior-developer-planner` (opus) → `dev:full-stack-engineer` (sonnet) → `dev:junior-reviewer` (sonnet) → `dev:full-stack-engineer` (sonnet)
+- Agent：`dev:senior-developer` (opus) → `dev:full-stack-developer` (sonnet) → `dev:junior-reviewer` (sonnet) → `dev:full-stack-developer` (sonnet)
 
 ### `/breaking` — Breaking 流水线（L 模式）
 
@@ -56,23 +56,23 @@
 
 1. 向用户提问，澄清：目标用户、核心功能与验收标准、技术栈偏好与约束、边界条件
 2. 生成涵盖六大领域的结构化 Spec 说明
-3. 保存到 `.artifacts/<yyyymmdd>/<任务简述>/spec.md`，与用户确认
+3. 保存到 `.artifacts/<yyyymmdd>/<任务简述>/SPEC.md`，与用户确认
 
-- 命令：`commands/spec.md`
+- 命令：`commands/SPEC.md`
 - Skill：`skills/spec-driven-development/SKILL.md`
 
 ### `/plan` — 将工作拆分为可验证的小任务
 
 1. 读取 Spec，进入 Plan Mode（只读）
 2. 垂直切片，每任务附带验收标准
-3. 保存到 `.artifacts/<yyyymmdd>/<任务简述>/plan.md` + `todo.md`
+3. 保存到 `.artifacts/<yyyymmdd>/<任务简述>/PLAN.md` + `TODO.md`
 
-- 命令：`commands/plan.md`
+- 命令：`commands/PLAN.md`
 - Skill：`skills/planning-and-task-breakdown/SKILL.md`
 
 ### `/build` — 增量实现
 
-1. 从 `.artifacts/<yyyymmdd>/<任务简述>/todo.md` 取下一个任务
+1. 从 `.artifacts/<yyyymmdd>/<任务简述>/TODO.md` 取下一个任务
 2. 实现代码 → 运行构建验证 → 提交
 3. 失败时输出错误，等待用户指导
 
@@ -131,9 +131,9 @@
 ```
 .artifacts/
   └── <yyyymmdd>/<任务简述>/
-      ├── spec.md      # 结构化规格说明
-      ├── plan.md      # 实现计划
-      ├── todo.md      # 任务列表
+      ├── SPEC.md      # 结构化规格说明
+      ├── PLAN.md      # 实现计划
+      ├── TODO.md      # 任务列表
       └── review.md    # 审查报告
 ```
 
@@ -170,10 +170,10 @@
 
 | Agent | model | 职责 |
 |-------|-------|------|
-| `dev:senior-developer-planner` | opus | DEFINE + PLAN 策划 |
-| `dev:full-stack-engineer` | sonnet | BUILD 全栈实现 |
-| `dev:senior-developer-backend` | sonnet | BUILD 后端实现 |
-| `dev:senior-developer-frontend` | sonnet | BUILD 前端实现 |
+| `dev:senior-developer` | opus | DEFINE + PLAN 策划 |
+| `dev:full-stack-developer` | sonnet | BUILD 全栈实现 |
+| `dev:backend-developer` | sonnet | BUILD 后端实现 |
+| `dev:frontend-developer` | sonnet | BUILD 前端实现 |
 | `dev:junior-reviewer` | sonnet | 单轮 REVIEW（S/M 模式） |
 | `dev:senior-reviewer` | opus | 完整 REVIEW + RE-REVIEW（L 模式） |
 
@@ -182,8 +182,8 @@
 ## 七、生命周期
 
 ```
-S: POPPING  → /popping  → full-stack-engineer (sonnet) → junior-reviewer (sonnet) → full-stack-engineer (sonnet)
-M: LOCKING  → /locking  → planner (opus) → full-stack-engineer (sonnet) → junior-reviewer (sonnet) → full-stack-engineer (sonnet)
+S: POPPING  → /popping  → full-stack-developer (sonnet) → junior-reviewer (sonnet) → full-stack-developer (sonnet)
+M: LOCKING  → /locking  → planner (opus) → full-stack-developer (sonnet) → junior-reviewer (sonnet) → full-stack-developer (sonnet)
 L: BREAKING → /breaking → planner (opus) → build (sonnet) → senior-reviewer (opus) → fix → re-review
 DEFINE      → /spec     → dev:spec-driven-development
             → (描述需求) → dev:interview-me
@@ -206,8 +206,8 @@ DOC         → /doc      → dev:doc-archiver
 | `commands/popping.md` | `/popping` — S 模式 |
 | `commands/locking.md` | `/locking` — M 模式 |
 | `commands/breaking.md` | `/breaking` — L 模式 |
-| `commands/spec.md` | `/spec` |
-| `commands/plan.md` | `/plan` |
+| `commands/SPEC.md` | `/spec` |
+| `commands/PLAN.md` | `/plan` |
 | `commands/build.md` | `/build` |
 | `commands/review.md` | `/review` |
 | `commands/check.md` | `/check` |
@@ -233,10 +233,10 @@ DOC         → /doc      → dev:doc-archiver
 ### Agent 定义
 | 文件 | model |
 |------|-------|
-| `agents/senior-developer-planner.md` | opus |
-| `agents/full-stack-engineer.md` | sonnet |
-| `agents/senior-developer-backend.md` | sonnet |
-| `agents/senior-developer-frontend.md` | sonnet |
+| `agents/senior-developer.md` | opus |
+| `agents/full-stack-developer.md` | sonnet |
+| `agents/backend-developer.md` | sonnet |
+| `agents/frontend-developer.md` | sonnet |
 | `agents/junior-reviewer.md` | sonnet |
 | `agents/senior-reviewer.md` | opus |
 

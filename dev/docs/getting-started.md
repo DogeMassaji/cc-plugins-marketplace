@@ -111,9 +111,9 @@ The `/spec`、`/plan`、`/review` 和 `/breaking` 命令将产物保存到 `.art
 ```
 .artifacts/
   └── <yyyymmdd>/<任务简述>/
-      ├── spec.md      # 结构化规格说明
-      ├── plan.md      # 实现计划
-      ├── todo.md      # 任务列表
+      ├── SPEC.md      # 结构化规格说明
+      ├── PLAN.md      # 实现计划
+      ├── TODO.md      # 任务列表
       └── review.md    # 审查报告
 ```
 

@@ -12,8 +12,8 @@ description: 重新审查——验证修复清单中的问题是否已修复
 3. 已修复项在 review.md 中标注 `- [x]`
 4. 未完全修复项追加 `(未完全修复: <原因>)`
 5. 检查修复是否引入回归问题
-6. 同步更新 todo.md 完成状态（若之前未完成的任务因修复完成)
-7. 更新 review.md 和 todo.md 并提交
+6. 同步更新 TODO.md 完成状态（若之前未完成的任务因修复完成)
+7. 更新 review.md 和 TODO.md 并提交
 
 启动 dev:senior-reviewer（opus），传入：
 - `review.md` 路径

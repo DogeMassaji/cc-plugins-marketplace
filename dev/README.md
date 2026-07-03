@@ -63,10 +63,10 @@
 
 | Agent | model | 职责 |
 |-------|-------|------|
-| `senior-developer-planner` | opus | DEFINE + PLAN 策划 |
-| `full-stack-engineer` | sonnet | BUILD 全栈实现 |
-| `senior-developer-backend` | sonnet | BUILD 后端实现 |
-| `senior-developer-frontend` | sonnet | BUILD 前端实现 |
+| `senior-developer` | opus | DEFINE + PLAN 策划 |
+| `full-stack-developer` | sonnet | BUILD 全栈实现 |
+| `backend-developer` | sonnet | BUILD 后端实现 |
+| `frontend-developer` | sonnet | BUILD 前端实现 |
 | `junior-reviewer` | sonnet | 单轮 REVIEW（S/M 模式） |
 | `senior-reviewer` | opus | 完整 REVIEW + RE-REVIEW（L 模式） |
 
