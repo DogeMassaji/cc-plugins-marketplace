@@ -26,10 +26,10 @@
     "./commands/plan.md",
     "./commands/review.md",
     "./commands/spec.md",
-    "./commands/breaking.md",
+    "./commands/ramble.md",
     "./commands/fix.md",
     "./commands/doc.md",
-    "./commands/popping.md",
+    "./commands/rush.md",
     "./commands/check.md"
   ],
   "agents": [

@@ -83,8 +83,8 @@ The `commands/` directory contains slash commands for Claude Code:
 
 | Command | Skill Invoked |
 |---------|---------------|
-| `/popping` | S 模式 — 全栈工程师 → 初级审查者 → 全栈工程师修复 |
-| `/breaking` | L 模式 — 全流程编排 |
+| `/rush` | S 模式 — 全栈工程师 → 初级审查者 → 全栈工程师修复 |
+| `/ramble` | L 模式 — 全流程编排 |
 | `/spec` | dev:spec-driven-development |
 | `/plan` | dev:planning-and-task-breakdown |
 | `/build` | dev:incremental-implementation |
@@ -104,7 +104,7 @@ Load a reference when you need detailed patterns beyond what the skill covers.
 
 ## Spec and task artifacts
 
-The `/spec`、`/plan`、`/review` 和 `/breaking` 命令将产物保存到 `.artifacts/<yyyymmdd>/<任务简述>/` 目录下：
+The `/spec`、`/plan`、`/review` 和 `/ramble` 命令将产物保存到 `.artifacts/<yyyymmdd>/<任务简述>/` 目录下：
 
 ```
 .artifacts/

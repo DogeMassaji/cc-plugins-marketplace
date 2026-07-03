@@ -1,8 +1,8 @@
 ---
-description: Popping 流水线（S 模式）——小变更快速交付：全栈工程师 (sonnet) → 初级审查者 (sonnet) → 全栈工程师修复 (sonnet)，BUILD → REVIEW → FIX 单轮
+description: Rush 流水线（S 模式）——小变更快速交付：全栈工程师 (sonnet) → 初级审查者 (sonnet) → 全栈工程师修复 (sonnet)，BUILD → REVIEW → FIX 单轮
 ---
 
-Popping — 短促精准。S 模式（小变更 ≤50 LOC）专用轻量流水线。启动三个 subagent 串行执行，审查后自动修复，单轮即结束。
+Rush — 短促精准。S 模式（小变更 ≤50 LOC）专用轻量流水线。启动三个 subagent 串行执行，审查后自动修复，单轮即结束。
 
 | 步骤 | Agent | model | 阶段 |
 |------|-------|-------|------|

@@ -10,20 +10,20 @@
 
 | 命令 | 模式 | 规模 | 流程 |
 |------|------|------|------|
-| `/popping` | **S** | ≤50 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
-| `/breaking` | **L** | >200 LOC | 策划者 → 构建（支持前后端分离）→ 审查 → 修复（单轮） |
+| `/rush` | **S** | ≤50 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
+| `/ramble` | **L** | >200 LOC | 策划者 → 构建（支持前后端分离）→ 审查 → 修复（单轮） |
 
 ## Agent 发现
 
 ```
 任务到达
     │
-    ├── S 模式 — 小改动/快速修复？────→ /popping
+    ├── S 模式 — 小改动/快速修复？────→ /rush
     │         ├── BUILD → dev:full-stack-developer (sonnet)
     │         ├── REVIEW → dev:junior-reviewer (sonnet)
     │         └── FIX → dev:full-stack-developer (sonnet)
     │
-    ├── L 模式 — 大型变更/全流程？─────→ /breaking
+    ├── L 模式 — 大型变更/全流程？─────→ /ramble
     │         ├── DEFINE + PLAN → dev:senior-engineer (opus)
     │         ├── BUILD（前后端分离 - 后端）→ dev:backend-developer (sonnet)
     │         │       └── BUILD（前后端分离 - 前端）→ dev:frontend-developer (sonnet)
@@ -92,8 +92,8 @@
 ## 生命周期
 
 ```
-POPPING  (S) → /popping  → full-stack-developer → junior-reviewer → full-stack-developer
-BREAKING (L) → /breaking → senior-engineer → build → senior-engineer → fix
+RUSH    (S) → /rush    → full-stack-developer → junior-reviewer → full-stack-developer
+RAMBLE  (L) → /ramble  → senior-engineer → build → senior-engineer → fix
 DEFINE    → interview-me, spec-driven-development
 PLAN      → planning-and-task-breakdown
 BUILD     → incremental-implementation
