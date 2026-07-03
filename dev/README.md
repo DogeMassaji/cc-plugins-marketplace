@@ -8,23 +8,23 @@
 
 ## 双模式流水线
 
-| 命令 | 模式 | 规模 | 流程 |
-|------|------|------|------|
-| `/rush` | **S** | ≤50 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
-| `/ramble` | **L** | >200 LOC | 策划者 → 构建（支持前后端分离）→ 审查 → 修复（单轮） |
-| `/fix` | **FIX** | 不限 | 诊断 → 修复 → 审查（DIAGNOSE → FIX → REVIEW） |
+| 命令 | 规模 | 流程 |
+|------|------|------|
+| `/rush` | ≤100 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
+| `/ramble` | >100 LOC | 策划者 → 构建（支持前后端分离）→ 审查 → 修复（单轮） |
+| `/fix` | 不限 | 诊断 → 修复 → 审查（DIAGNOSE → FIX → REVIEW） |
 
 ## Agent 发现
 
 ```
 任务到达
     │
-    ├── S 模式 — 小改动/快速修复？────→ /rush
+    ├── 小改动/快速修复？────────→ /rush
     │         ├── BUILD → dev:full-stack-developer (sonnet)
     │         ├── REVIEW → dev:junior-reviewer (sonnet)
     │         └── FIX → dev:full-stack-developer (sonnet)
     │
-    ├── L 模式 — 大型变更/全流程？─────→ /ramble
+    ├── 大型变更/全流程？────────→ /ramble
     │         ├── DEFINE + PLAN → dev:senior-engineer (opus)
     │         ├── BUILD（前后端分离 - 后端）→ dev:backend-developer (sonnet)
     │         │       └── BUILD（前后端分离 - 前端）→ dev:frontend-developer (sonnet)
@@ -87,7 +87,7 @@
 | `full-stack-developer` | sonnet | BUILD 全栈实现 |
 | `backend-developer` | sonnet | BUILD 后端实现 |
 | `frontend-developer` | sonnet | BUILD 前端实现 |
-| `junior-reviewer` | sonnet | 单轮 REVIEW（S 模式） |
+| `junior-reviewer` | sonnet | 单轮 REVIEW |
 
 ## 生命周期
 

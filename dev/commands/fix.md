@@ -36,7 +36,7 @@ Fix — 精准修复。从用户描述的 bug 或现象出发，执行诊断 →
 
 ---
 
-## 步骤 1——启动 dev:full-stack-developer 诊断（sonnet）
+## 步骤 1——启动 dev:full-stack-developer 诊断
 
 启动 `dev:full-stack-developer` subagent，显式指定 `model: "sonnet"`。
 
@@ -57,9 +57,9 @@ Fix — 精准修复。从用户描述的 bug 或现象出发，执行诊断 →
 
 ---
 
-## 步骤 2——启动 dev:full-stack-developer 修复（sonnet）
+## 步骤 2——修复
 
-收到用户确认后，再次启动 `dev:full-stack-developer` subagent，显式指定 `model: "sonnet"`，传入：
+收到用户确认后，传入：
 - `DIAGNOSE.md` 路径
 - 用户补充信息（如有）
 
@@ -92,22 +92,12 @@ Fix — 精准修复。从用户描述的 bug 或现象出发，执行诊断 →
 
 ---
 
-## Agent tool call 示例
-
-```
-步骤 1: Agent(description="诊断bug", subagent_type="dev:full-stack-developer", model="sonnet", prompt="用户报告以下问题，请诊断根因: <bug描述>")
---- 展示诊断结果，等待用户确认 ---
-步骤 2: Agent(description="修复代码", subagent_type="dev:full-stack-developer", model="sonnet", prompt="按诊断结果修复: 读取 .artifacts/.../DIAGNOSE.md，逐项修复并提交。用户补充: <如有>")
-步骤 3: Agent(description="审查修复", subagent_type="dev:junior-reviewer", model="sonnet", prompt="审查修复结果，验证诊断中的问题是否解决: 读取 .artifacts/.../DIAGNOSE.md")
-```
-
 ## 规则
 
 1. **严格串行**——步骤 1 → 用户确认 → 步骤 2 → 步骤 3 顺序执行，不得跳过
 2. **用户确认不可省略**——诊断结果必须展示给用户，收到明确信号后才进入修复
 3. **model 参数必须显式指定**——不依赖 agent frontmatter 的 model 字段
-4. 产物驱动——subagent 之间通过产物文件传递信息
-5. 任一 subagent 失败则停止流水线，不得继续
-6. 所有产物写入 `.artifacts/<yyyymmdd>/<任务简述>/`
-7. **单轮诊断 + 单轮修复 + 单轮审查**——无循环
-8. **诊断阶段不修改代码**——只读分析
+4. 任一 subagent 失败则停止流水线，不得继续
+5. 所有产物写入 `.artifacts/<yyyymmdd>/<任务简述>/`
+6. **单轮诊断 + 单轮修复 + 单轮审查**——无循环
+7. **诊断阶段不修改代码**——只读分析
