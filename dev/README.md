@@ -12,7 +12,7 @@
 |------|------|------|------|
 | `/popping` | **S** | ≤50 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
 | `/locking` | **M** | 50-200 LOC | 策划者 → 全栈工程师 → 初级审查者 → 全栈工程师修复（SPEC → PLAN → BUILD → REVIEW → FIX） |
-| `/breaking` | **L** | >200 LOC | 策划者 → 构建（支持前后端分离）→ 高级审查者 → 修复 → 重新审查 |
+| `/breaking` | **L** | >200 LOC | 策划者 → 构建（支持前后端分离）→ 审查 → 修复（单轮） |
 
 ## 单阶段命令
 
@@ -24,7 +24,6 @@
 | `/review` | Review | 五轴代码审查 |
 | `/check` | Check | 快速预检——编译+安全+规范扫描（只读） |
 | `/fix` | Fix | 按审查清单修复 |
-| `/re-review` | Re-Review | 验证修复结果 |
 | `/doc` | Doc | 文档归档整理 |
 
 ---
@@ -63,7 +62,7 @@
 
 | Agent | model | 职责 |
 |-------|-------|------|
-| `senior-engineer` | opus | DEFINE + PLAN + REVIEW + RE-REVIEW 全流程 |
+| `senior-engineer` | opus | DEFINE + PLAN + REVIEW 全流程 |
 | `full-stack-developer` | sonnet | BUILD 全栈实现 |
 | `backend-developer` | sonnet | BUILD 后端实现 |
 | `frontend-developer` | sonnet | BUILD 前端实现 |

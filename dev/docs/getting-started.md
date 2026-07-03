@@ -91,7 +91,6 @@ The `commands/` directory contains slash commands for Claude Code:
 | `/build` | dev:incremental-implementation |
 | `/review` | dev:code-review-and-quality |
 | `/fix` | dev:fix |
-| `/re-review` | dev:re-review |
 | `/doc` | dev:doc-archiver |
 
 ## Using References

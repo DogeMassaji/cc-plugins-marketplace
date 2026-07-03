@@ -28,7 +28,6 @@
     "./commands/SPEC.md",
     "./commands/breaking.md",
     "./commands/FIX.md",
-    "./commands/RE-REVIEW.md",
     "./commands/doc.md",
     "./commands/popping.md",
     "./commands/locking.md",
