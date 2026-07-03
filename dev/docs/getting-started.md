@@ -84,7 +84,6 @@ The `commands/` directory contains slash commands for Claude Code:
 | Command | Skill Invoked |
 |---------|---------------|
 | `/popping` | S 模式 — 全栈工程师 → 初级审查者 → 全栈工程师修复 |
-| `/locking` | M 模式 — 策划者 → 全栈工程师 → 初级审查者 → 全栈工程师修复 |
 | `/breaking` | L 模式 — 全流程编排 |
 | `/spec` | dev:spec-driven-development |
 | `/plan` | dev:planning-and-task-breakdown |

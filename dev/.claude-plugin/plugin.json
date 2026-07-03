@@ -30,7 +30,6 @@
     "./commands/FIX.md",
     "./commands/doc.md",
     "./commands/popping.md",
-    "./commands/locking.md",
     "./commands/CHECK.md"
   ],
   "agents": [
