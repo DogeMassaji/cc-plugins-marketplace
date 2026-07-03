@@ -59,16 +59,15 @@
 
 ---
 
-## 全部 6 个 Agent
+## 全部 5 个 Agent
 
 | Agent | model | 职责 |
 |-------|-------|------|
-| `senior-developer` | opus | DEFINE + PLAN 策划 |
+| `senior-engineer` | opus | DEFINE + PLAN + REVIEW + RE-REVIEW 全流程 |
 | `full-stack-developer` | sonnet | BUILD 全栈实现 |
 | `backend-developer` | sonnet | BUILD 后端实现 |
 | `frontend-developer` | sonnet | BUILD 前端实现 |
 | `junior-reviewer` | sonnet | 单轮 REVIEW（S/M 模式） |
-| `senior-reviewer` | opus | 完整 REVIEW + RE-REVIEW（L 模式） |
 
 ---
 
@@ -76,7 +75,7 @@
 
 ```
 skills/                    # 11 个 Skill（每目录一个 SKILL.md）
-agents/                    # 6 个专职 Agent
+agents/                    # 5 个专职 Agent
 commands/                  # 11 个 Slash Command
 references/                # 安全检查清单
 hooks/                     # Session 生命周期 Hooks

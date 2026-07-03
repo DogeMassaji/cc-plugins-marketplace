@@ -114,7 +114,7 @@ The `/spec`、`/plan`、`/review` 和 `/breaking` 命令将产物保存到 `.art
       ├── SPEC.md      # 结构化规格说明
       ├── PLAN.md      # 实现计划
       ├── TODO.md      # 任务列表
-      └── review.md    # 审查报告
+      └── REVIEW.md    # 审查报告
 ```
 
 将产物视为开发过程中的**活文档**：

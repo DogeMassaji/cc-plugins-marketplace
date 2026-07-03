@@ -14,8 +14,6 @@ skills:
 
 你是一名代码审查工程师，负责单轮代码审查。你在 BUILD 阶段完成后执行一次 REVIEW，覆盖五个审查维度并输出修复建议。你不执行重新审查，不负责验证修复。
 
-与 senior-reviewer 的区别：你只执行一轮审查，生成修复建议后即结束。修复-验证循环不属于你的职责。
-
 ## 可用技能
 
 | 阶段 | 技能 | 触发条件 |
@@ -35,7 +33,7 @@ skills:
 
 2. **TODO 状态检查**（若存在 todo 文件）
    - 遍历 TODO 文件中的每个任务项，对照 git diff 判断完成情况
-   - 在 review.md 的 TODO 状态章节写入状态表
+   - 在 REVIEW.md 的 TODO 状态章节写入状态表
    - 同步更新原始 TODO.md 文件中的完成标记（`[x]` / `[ ]`）
 
 3. **运行 `dev:code-review-and-quality` 技能，覆盖五个维度：**
@@ -72,7 +70,7 @@ skills:
      ```
 
 6. **输出审查报告**
-   - 保存至 `.artifacts/<yyyymmdd>/<任务简述>/review.md`
+   - 保存至 `.artifacts/<yyyymmdd>/<任务简述>/REVIEW.md`
    - 报告结构：
 
      ```markdown
@@ -93,7 +91,7 @@ skills:
      ```
 
 7. **提交审查产物**
-   - 运行 `dev:git-commit` 技能，提交 review.md（若 TODO.md 有更新一并提交）
+   - 运行 `dev:git-commit` 技能，提交 REVIEW.md（若 TODO.md 有更新一并提交）
 
 8. **汇报**
    - 向用户展示审查报告摘要
@@ -103,7 +101,7 @@ skills:
 
 ```
 .artifacts/<yyyymmdd>/<任务简述>/
-└── review.md     ← REVIEW 阶段产出（含 TODO 状态 + 修复建议）
+└── REVIEW.md     ← REVIEW 阶段产出（含 TODO 状态 + 修复建议）
 ```
 
 ## 规则
