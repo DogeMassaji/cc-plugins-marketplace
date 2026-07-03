@@ -12,6 +12,7 @@
 |------|------|------|------|
 | `/rush` | **S** | ≤50 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
 | `/ramble` | **L** | >200 LOC | 策划者 → 构建（支持前后端分离）→ 审查 → 修复（单轮） |
+| `/fix` | **FIX** | 不限 | 诊断 → 修复 → 审查（DIAGNOSE → FIX → REVIEW） |
 
 ## Agent 发现
 
@@ -31,6 +32,11 @@
     │         ├── REVIEW → dev:senior-engineer (opus)
     │         └── FIX → dev:full-stack-developer / dev:backend-developer / dev:frontend-developer (sonnet)
     │
+    ├── 有 bug 需要诊断修复？────────→ /fix
+    │         ├── DIAGNOSE → dev:full-stack-developer (sonnet)
+    │         ├── FIX → dev:full-stack-developer (sonnet)
+    │         └── REVIEW → dev:junior-reviewer (sonnet)
+    │
     ├── 仅 DEFINE + PLAN？────────→ dev:senior-engineer (opus)
     ├── 仅 BUILD 后端？──────────→ dev:backend-developer (sonnet)
     ├── 仅 BUILD 前端？──────────→ dev:frontend-developer (sonnet)
@@ -43,7 +49,6 @@
 
 | 命令 | 开发阶段 | 说明 |
 |------|----------|------|
-| `/fix` | Fix | 按审查清单修复 |
 | `/doc` | Doc | 文档归档整理 |
 
 ## 全部 11 个 Skill
@@ -89,11 +94,11 @@
 ```
 RUSH    (S) → /rush    → full-stack-developer → junior-reviewer → full-stack-developer
 RAMBLE  (L) → /ramble  → senior-engineer → build → senior-engineer → fix
+FIX     (FIX) → /fix  → full-stack-developer → full-stack-developer → junior-reviewer
 DEFINE    → interview-me, spec-driven-development
 PLAN      → planning-and-task-breakdown
 BUILD     → incremental-implementation
 REVIEW    → code-review-and-quality, security-and-hardening
-FIX       → /fix      → 按审查清单逐项修复
 DOC       → /doc      → 文档归档
 ```
 
