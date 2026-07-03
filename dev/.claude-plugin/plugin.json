@@ -23,10 +23,6 @@
     "./skills/quick-check"
   ],
   "commands": [
-    "./commands/build.md",
-    "./commands/plan.md",
-    "./commands/review.md",
-    "./commands/spec.md",
     "./commands/ramble.md",
     "./commands/fix.md",
     "./commands/doc.md",
