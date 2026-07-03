@@ -19,7 +19,8 @@
     "./skills/using-agent-skills",
     "./skills/git-commit",
     "./skills/api-doc-generator",
-    "./skills/backend-test-generator"
+    "./skills/backend-test-generator",
+    "./skills/quick-check"
   ],
   "commands": [
     "./commands/build.md",
@@ -29,8 +30,7 @@
     "./commands/ramble.md",
     "./commands/fix.md",
     "./commands/doc.md",
-    "./commands/rush.md",
-    "./commands/check.md"
+    "./commands/rush.md"
   ],
   "agents": [
     "./agents/senior-engineer.md",

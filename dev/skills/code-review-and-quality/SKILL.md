@@ -160,7 +160,11 @@ description: Conducts multi-axis code review. Use before merging any change. Use
 | **Optional:** / **Consider:** | 建议 | 值得考虑但不必须 |
 | **FYI** | 仅供参考 | 无需行动——为未来参考的上下文 |
 
-### 第 5 步：验证过程
+### 第 5 步：快速预检
+
+调用 `dev:quick-check` skill 执行编译检查、安全扫描和规范检查。确认预检无阻塞问题后再做最终裁决。
+
+### 第 6 步：验证过程
 
 检查作者的验证叙述：
 
@@ -213,6 +217,7 @@ description: Conducts multi-axis code review. Use before merging any change. Use
 - [ ] 测试通过
 - [ ] 构建成功
 - [ ] 手动验证完成（如适用）
+- [ ] `dev:quick-check` 预检通过（编译+安全+规范）
 
 ### 裁决
 - [ ] **批准** — 准备好合并
@@ -222,6 +227,7 @@ description: Conducts multi-axis code review. Use before merging any change. Use
 ## 参考
 
 - 详细安全审查指导见 `references/security-checklist.md`
+- 合并前快速预检见 `dev:quick-check`（编译检查 + 安全扫描 + 规范检查）
 
 
 ## 警告信号

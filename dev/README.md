@@ -47,7 +47,6 @@
 | `/plan` | Plan | 拆分为可验证的小任务 |
 | `/build` | Build | 增量实现 |
 | `/review` | Review | 五轴代码审查 |
-| `/check` | Check | 快速预检——编译+安全+规范扫描（只读） |
 | `/fix` | Fix | 按审查清单修复 |
 | `/doc` | Doc | 文档归档整理 |
 
@@ -98,7 +97,6 @@ DEFINE    → interview-me, spec-driven-development
 PLAN      → planning-and-task-breakdown
 BUILD     → incremental-implementation
 REVIEW    → code-review-and-quality, security-and-hardening
-CHECK     → /check    → 只读快速扫描（编译+安全+规范）
 FIX       → /fix      → 按审查清单逐项修复
 DOC       → /doc      → 文档归档
 ```
