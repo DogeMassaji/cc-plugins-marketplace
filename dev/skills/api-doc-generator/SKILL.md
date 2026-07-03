@@ -164,7 +164,7 @@ components:
 
 ### Step 6: 保存文档
 
-- Markdown: `docs/api.md` 或 `.artifacts/<yyyymmdd>/<任务简述>/api.md`
+- Markdown: `docs/API.md` 或 `.artifacts/<yyyymmdd>/<任务简述>/API.md`
 - OpenAPI: `docs/openapi.yaml` 或项目根目录 `openapi.yaml`
 - 若项目已有文档文件，增量更新而非覆盖
 - 对于 `git diff` 增量模式，仅更新变更涉及的接口

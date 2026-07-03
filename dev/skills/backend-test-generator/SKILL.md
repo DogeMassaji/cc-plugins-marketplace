@@ -115,7 +115,7 @@ Ruby     → Gemfile              → RSpec / Minitest
 
 ### Step 8: 输出报告
 
-产物存放：优先 `.artifacts/<YYMMDD_序号_业务>/test_report.md`，无当天业务时放 `.artifacts/general/test_report.md`。
+产物存放：优先 `.artifacts/<YYMMDD_序号_业务>/TEST_REPORT.md`，无当天业务时放 `.artifacts/general/TEST_REPORT.md`。
 
 ```markdown
 # 测试报告

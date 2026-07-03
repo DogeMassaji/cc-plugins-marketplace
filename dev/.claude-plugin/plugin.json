@@ -23,14 +23,14 @@
   ],
   "commands": [
     "./commands/build.md",
-    "./commands/PLAN.md",
-    "./commands/REVIEW.md",
-    "./commands/SPEC.md",
+    "./commands/plan.md",
+    "./commands/review.md",
+    "./commands/spec.md",
     "./commands/breaking.md",
-    "./commands/FIX.md",
+    "./commands/fix.md",
     "./commands/doc.md",
     "./commands/popping.md",
-    "./commands/CHECK.md"
+    "./commands/check.md"
   ],
   "agents": [
     "./agents/senior-engineer.md",

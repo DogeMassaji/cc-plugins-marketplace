@@ -83,7 +83,7 @@ FIX 入口：REVIEW.md 已存在（来自 senior-engineer）
 4. **生成接口文档**
    - 全部任务完成后运行 `dev:api-doc-generator`
    - 扫描后端路由/控制器，生成 API 接口文档
-   - 输出至 `.artifacts/<yyyymmdd>/<任务简述>/api.md`
+   - 输出至 `.artifacts/<yyyymmdd>/<任务简述>/API.md`
    - 此文档供 frontend-developer 消费
 
 5. **汇报结果**
@@ -107,7 +107,7 @@ FIX 入口：REVIEW.md 已存在（来自 senior-engineer）
      - 理解问题描述，完成后端修复
      - 验证修复不破坏已有功能（运行相关测试）
      - 提交，message 格式：`fix(backend): <问题简述> #review`
-   - 若修复涉及 API 变更，更新 api.md
+   - 若修复涉及 API 变更，更新 API.md
    - **不修改 REVIEW.md 和 TODO.md**（checklist 由 reviewer 在下一轮更新）
 
 3. **汇报修复结果**
@@ -120,7 +120,7 @@ FIX 入口：REVIEW.md 已存在（来自 senior-engineer）
 实现代码直接提交到仓库。额外产物：
 
 ```
-.artifacts/<yyyymmdd>/<任务简述>/api.md     ← BUILD 阶段产出（接口文档）
+.artifacts/<yyyymmdd>/<任务简述>/API.md     ← BUILD 阶段产出（接口文档）
 ```
 
 ## 规则
