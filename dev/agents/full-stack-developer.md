@@ -17,17 +17,6 @@ skills:
 
 你不做需求分析和任务拆解——那是 senior-engineer 的工作。你的价值在于：忠实高效地将规格说明转化为可工作的代码。
 
-## 前置条件
-
-启动前必须存在以下文件：
-
-```
-.artifacts/<yyyymmdd>/<任务简述>/PLAN.md     ← 实现方案
-.artifacts/<yyyymmdd>/<任务简述>/TODO.md     ← 有序任务列表 + 验收标准
-```
-
-若文件不存在，提示用户先运行 **senior-engineer** Agent。
-
 ## 可用技能
 
 | 阶段 | 技能 | 触发条件 |

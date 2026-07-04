@@ -12,18 +12,6 @@ Rush 模式（小变更 ≤50 LOC）专用轻量流水线。启动两个 subagen
 
 **产物归档：** 审查报告存放在 `.artifacts/<yyyymmdd>/<任务简述>/REVIEW.md`。
 
-**适用场景：**
-- ≤100 LOC 变更
-- 单文件改动
-- typo 修复、配置修改、简单 bug 修复、单函数重构
-- 无架构影响
-
-**不适用场景（建议升级到 `/flow` 或 `/workflow`）：**
-- 新功能、新模块
-- 跨多文件/多模块变更
-- API 契约变更
-- 数据库 schema 变更
-
 ---
 
 ## 步骤 1——启动 dev:full-stack-developer（sonnet）
