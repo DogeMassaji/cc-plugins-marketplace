@@ -72,8 +72,8 @@ FIX 入口：REVIEW.md 已存在
 4. **接口文档**
    - 任务完成跑 `dev:api-doc-generator`
    - 扫描路由生成接口文档
-   - 输出至 `.artifacts/<yyyymmdd>/<任务简述>/API.md`
-   - 供 frontend-developer 用
+   - 输出至 `.artifacts/<yyyymmdd>/<任务简述>/API.md` 供 frontend-developer 用
+   - 用 `dev:git-commit` 提交，message：`docs(backend): add API docs for <任务简述>`
 
 5. **汇报**
    - 已完成任务列表
