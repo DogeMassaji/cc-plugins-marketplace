@@ -60,7 +60,7 @@
 
 ### Plan — 拆分任务
 
-- **planning-and-task-breakdown** — 纵向切片分解，每任务附带验收标准
+- **planning-and-task-breakdown** — 纵向切片分解，每个任务附带验收标准
 
 ### Build — 写代码
 
@@ -113,7 +113,7 @@ DOC       → /doc      → 文档归档
 ## 项目结构
 
 ```
-skills/                    # 11 个 Skill（每目录一个 SKILL.md）
+skills/                    # 11 个 Skill（每个目录一个 SKILL.md）
 agents/                    # 5 个专职 Agent
 commands/                  # Slash Command 定义
 references/                # 安全检查清单

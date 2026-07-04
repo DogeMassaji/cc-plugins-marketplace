@@ -27,7 +27,7 @@ skills:
 | PLAN | `dev:planning-and-task-breakdown` | 将 Spec 拆解为带验收标准的任务列表 |
 | REVIEW | `dev:code-review-and-quality` | 审查所有已实现变更 |
 | REVIEW | `dev:security-and-hardening` | 发现安全问题时深入执行 |
-| ALL | `dev:git-commit` | 每阶段产物产出后提交 |
+| ALL | `dev:git-commit` | 每个阶段产物产出后提交 |
 
 ## 入口
 
@@ -216,7 +216,7 @@ REVIEW.md          ← REVIEW
 
 ## 规则
 
-1. **严格串行**——DEFINE → PLAN → REVIEW 顺序执行，每阶段完成自动进入下一
+1. **严格串行**——DEFINE → PLAN → REVIEW 顺序执行，每个阶段完成自动进入下一
 2. **失败即停**——阶段遇无法解决问题立即停止并说明
 3. **假设透明**——DEFINE 阶段即时暴露所有假设，不默默填充
 4. **只策划不实现**——不写代码，不跑 `dev:incremental-implementation`

@@ -7,54 +7,51 @@ description: Discovers and invokes agent skills. Use when starting a session or 
 
 ## 概述
 
-Agent Skills 是按开发阶段组织的工程工作流集合。每个 Skill 编码了资深工程师遵循的特定流程。本 meta-skill 帮助你发现和应用正确的 Skill。
+Agent Skills 是按开发阶段组织的工作流集合。每 Skill 编码资深工程师的特有流程。本 meta-skill 助你发现和应用正确 Skill。
 
 ## Skill 发现
 
-任务到达时，识别开发阶段并应用对应 Skill：
-
 ```
 任务到达
-    │
-    ├── 需求不清晰？──────────────→ dev:interview-me
-    ├── 新项目/新功能/变更？──────→ dev:spec-driven-development
-    ├── 有 Spec，需要任务拆分？───→ dev:planning-and-task-breakdown
-    ├── 实现代码？───────────────→ dev:incremental-implementation
-    └── 审查代码？───────────────→ dev:code-review-and-quality
-        └── 安全问题？───────────→ dev:security-and-hardening
+    ├── 需求不清晰？→ dev:interview-me
+    ├── 新项目/功能？→ dev:spec-driven-development
+    ├── 有 Spec，需拆分？→ dev:planning-and-task-breakdown
+    ├── 实现代码？→ dev:incremental-implementation
+    └── 审查代码？→ dev:code-review-and-quality
+        └── 安全问题？→ dev:security-and-hardening
 ```
 
-## 核心行为准则
+## 核心行为
 
-以下准则在所有 Skill 中始终适用。
+所有 Skill 始终适用。
 
 ### 0. 中文输出
 
-所有面向人类的文档、报告、Spec、计划、任务列表、审查反馈和 commit message 必须使用中文。代码标识符、技术术语和配置键保留原文。
+文档、报告、Spec、计划、审查、commit 用中文。标识符、术语、配置键保留原文。
 
 ### 1. 暴露假设
 
-在实现之前，明确陈述你的假设。不要默默填充模糊需求。最常见的失败模式是做出错误假设并不加验证地推进。
+实现前明确陈述假设。不默默填充模糊需求。最常见失败：错假设不验证推进。
 
 ### 2. 管理困惑
 
-遇到不一致或冲突需求时：停止 → 明确指出困惑点 → 提出权衡或询问 → 等待解决后再继续。不要猜。
+遇冲突/不一致：停→指困惑点→提权衡/问→等解决再继。不猜。
 
-### 3. 必要时提出异议
+### 3. 必要时异议
 
-当方案存在明显问题时，直接指出、量化影响、提出替代方案。诚实的技术分歧比虚假的认同更有价值。
+方案明显有问题时，直接指、量化影响、提替代。诚实分歧比假认同更有价值。
 
 ### 4. 强制简洁
 
-能用更少行数完成就不要多写。不要过早抽象——第三个用例出现之前不需要泛化。选择无聊、显而易见的方案。
+能少写则少写。不早抽象——第三个用例前不泛化。选无聊显而易见的方案。
 
-### 5. 保持范围控制
+### 5. 范围控制
 
-只改任务要求的内容。不做无关的"顺手清理"、不删除不完全理解的代码、不添加 spec 之外的功能。
+只改任务要求。不做"顺手清理"、不删不完全理解代码、不加 spec 外功能。
 
-### 6. 验证，不要假设
+### 6. 验证，不假设
 
-每个 Skill 都有验证步骤。验证通过之前任务不算完成。必须有证据，不能只是"看起来正确"。
+每 Skill 有验证步。通过前任务不算完成。需证据，非"看起来对"。
 
 ## 生命周期
 
@@ -65,11 +62,11 @@ BUILD  → dev:incremental-implementation
 REVIEW → dev:code-review-and-quality, dev:security-and-hardening
 ```
 
-完整特性流程：dev:interview-me → dev:spec-driven-development → dev:planning-and-task-breakdown → dev:incremental-implementation → dev:code-review-and-quality
+完整流程：interview-me → spec-driven-development → planning-and-task-breakdown → incremental-implementation → code-review-and-quality。
 
 ## Skill 规则
 
-1. 开始工作前检查是否有适用的 Skill
-2. Skill 是工作流，不是建议——按顺序执行，不要跳过验证
-3. 多个 Skill 可以组合使用，按需串联
-4. 不确定时，从 spec 开始
+1. 开始前检有否适用 Skill
+2. Skill 是工作流非建议——顺序执行，不跳验证
+3. 多 Skill 可组合串联
+4. 不确定时从 spec 开始

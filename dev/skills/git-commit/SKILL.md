@@ -9,29 +9,29 @@ description: Creates well-formatted git commits following conventional commit st
 ```
 
 ## 行为
-1. 通过 `git diff --staged` 分析暂存的变更
+1. `git diff --staged` 分析暂存变更
 2. 生成中文 conventional commit message
-3. 以正确格式创建提交
+3. 创建提交
 
-## 提交格式
+## 格式
 ```
 <type>(<scope>): <中文描述>
 
-[optional body]
+[body]
 
-[optional footer]
+[footer]
 ```
 
 ## 类型
 - feat: 新功能
-- fix: 缺陷修复
-- docs: 文档变更
-- style: 代码风格变更
-- refactor: 代码重构
-- test: 测试补充或修改
-- chore: 维护任务
+- fix: 修复
+- docs: 文档
+- style: 代码风格
+- refactor: 重构
+- test: 测试
+- chore: 维护
 
-## 示例输出
+## 示例
 ```
 feat(auth): 增加密码重置功能
 
