@@ -20,19 +20,23 @@
     "./skills/git-commit",
     "./skills/api-doc-generator",
     "./skills/backend-test-generator",
-    "./skills/quick-check"
+    "./skills/quick-check",
+    "./skills/spec",
+    "./skills/plan",
+    "./skills/build",
+    "./skills/test",
+    "./skills/review",
+    "./skills/fix"
   ],
   "commands": [
     "./commands/ramble.md",
-    "./commands/fix.md",
+    "./commands/patch.md",
     "./commands/doc.md",
     "./commands/rush.md"
   ],
   "agents": [
-    "./agents/senior-engineer.md",
     "./agents/full-stack-developer.md",
     "./agents/frontend-developer.md",
-    "./agents/backend-developer.md",
-    "./agents/junior-reviewer.md"
+    "./agents/backend-developer.md"
   ]
 }

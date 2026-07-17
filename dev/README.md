@@ -2,47 +2,46 @@
 
 **AI 编码 Agent 的工程工作流 Skill 集合。**
 
-覆盖 Define → Plan → Build → Review → Fix 全开发阶段。
+覆盖 Define → Plan → Build → Test → Review → Fix 全开发阶段。
 
 ---
 
-## 双模式流水线
+## 三模式流水线
 
 | 命令 | 规模 | 流程 |
 |------|------|------|
-| `/rush` | ≤100 LOC | 全栈工程师 → 初级审查者 → 全栈工程师修复（BUILD → REVIEW → FIX） |
-| `/ramble` | >100 LOC | 策划者 → 构建（支持前后端分离）→ 审查 → 修复（单轮） |
-| `/fix` | 不限 | 诊断 → 修复 → 审查（DIAGNOSE → FIX → REVIEW） |
+| `/rush` | ≤100 LOC | BUILD（subagent）→ REVIEW（inline）→ FIX（subagent） |
+| `/ramble` | >100 LOC | DEFINE + PLAN（inline）→ BUILD（subagent，支持前后端分离）→ REVIEW（inline）→ FIX（subagent） |
+| `/patch` | 不限 | DIAGNOSE（subagent）→ FIX（subagent）→ REVIEW（inline） |
 
-## Agent 发现
+## 阶段执行方式
 
 ```
 任务到达
     │
     ├── 小改动/快速修复？────────→ /rush
-    │         ├── BUILD → dev:full-stack-developer (sonnet)
-    │         ├── REVIEW → dev:junior-reviewer (sonnet)
-    │         └── FIX → dev:full-stack-developer (sonnet)
+    │         ├── BUILD → subagent: dev:full-stack-developer
+    │         ├── REVIEW → inline: dev:review
+    │         └── FIX → subagent: dev:full-stack-developer
     │
     ├── 大型变更/全流程？────────→ /ramble
-    │         ├── DEFINE + PLAN → dev:senior-engineer (opus)
-    │         ├── BUILD（前后端分离 - 后端）→ dev:backend-developer (sonnet)
-    │         │       └── BUILD（前后端分离 - 前端）→ dev:frontend-developer (sonnet)
-    │         ├── BUILD（单体）→ dev:full-stack-developer (sonnet)
-    │         ├── REVIEW → dev:senior-engineer (opus)
-    │         └── FIX → dev:full-stack-developer / dev:backend-developer / dev:frontend-developer (sonnet)
+    │         ├── DEFINE + PLAN → inline: dev:spec → dev:plan
+    │         ├── BUILD（前后端分离 - 后端）→ subagent: dev:backend-developer
+    │         │       └── BUILD（前后端分离 - 前端）→ subagent: dev:frontend-developer
+    │         ├── BUILD（单体）→ subagent: dev:full-stack-developer
+    │         ├── REVIEW → inline: dev:review
+    │         └── FIX → subagent: dev:full-stack-developer / dev:backend-developer / dev:frontend-developer
     │
-    ├── 有 bug 需要诊断修复？────────→ /fix
-    │         ├── DIAGNOSE → dev:full-stack-developer (sonnet)
-    │         ├── FIX → dev:full-stack-developer (sonnet)
-    │         └── REVIEW → dev:junior-reviewer (sonnet)
+    ├── 有 bug 需要诊断修复？────────→ /patch
+    │         ├── DIAGNOSE → subagent: dev:full-stack-developer
+    │         ├── FIX → subagent: dev:full-stack-developer
+    │         └── REVIEW → inline: dev:review
     │
-    ├── 仅 DEFINE + PLAN？────────→ dev:senior-engineer (opus)
-    ├── 仅 BUILD 后端？──────────→ dev:backend-developer (sonnet)
-    ├── 仅 BUILD 前端？──────────→ dev:frontend-developer (sonnet)
-    ├── 仅 BUILD 单体？──────────→ dev:full-stack-developer (sonnet)
-    ├── 仅 REVIEW（完整）？──────→ dev:senior-engineer (opus)
-    └── 仅 REVIEW（单轮）？──────→ dev:junior-reviewer (sonnet)
+    ├── 仅 DEFINE + PLAN？────────→ inline: dev:spec → dev:plan
+    ├── 仅 BUILD 后端？──────────→ subagent: dev:backend-developer
+    ├── 仅 BUILD 前端？──────────→ subagent: dev:frontend-developer
+    ├── 仅 BUILD 单体？──────────→ subagent: dev:full-stack-developer
+    └── 仅 REVIEW？──────────────→ inline: dev:review
 ```
 
 ## 单阶段命令
@@ -51,61 +50,57 @@
 |------|----------|------|
 | `/doc` | Doc | 文档归档整理 |
 
-## 全部 11 个 Skill
+## Phase Skills（6 个）
 
-### Define — 明确要构建什么
+| Skill | 阶段 | 说明 |
+|-------|------|------|
+| `dev:spec` | DEFINE | 需求 → SPEC.md |
+| `dev:plan` | PLAN | SPEC.md → PLAN.md + TODO.md |
+| `dev:build` | BUILD | TODO.md → 实现代码 |
+| `dev:test` | TEST | 变更 → 测试 + TEST_REPORT.md |
+| `dev:review` | REVIEW | diff → REVIEW.md + TODO 更新 |
+| `dev:fix` | FIX | REVIEW.md → 修复代码 |
+
+## Utility Skills
 
 - **interview-me** — 一次一问，挖掘真实意图
 - **spec-driven-development** — 编写覆盖六大领域的结构化 Spec
-
-### Plan — 拆分任务
-
 - **planning-and-task-breakdown** — 纵向切片分解，每个任务附带验收标准
-
-### Build — 写代码
-
 - **incremental-implementation** — 垂直切片：实现 → 测试 → 验证 → 提交
 - **backend-test-generator** — 根据变更自动生成后端测试用例
 - **api-doc-generator** — 扫描后端路由/控制器自动生成 API 文档
-
-### Review — 合并前质量门禁
-
 - **code-review-and-quality** — 五轴审查
 - **security-and-hardening** — 威胁建模、OWASP 防御、AI/LLM 安全
-
-### Meta
-
 - **using-agent-skills** — Skill 发现与路由，核心行为准则
 - **git-commit** — 中文 Conventional Commit 提交
 - **doc-archiver** — 按编号目录归档项目文档
+- **quick-check** — 合并前编译/安全/规范预检
 
-## 全部 5 个 Agent
+## 全部 3 个 Agent
 
 | Agent | model | 职责 |
 |-------|-------|------|
-| `senior-engineer` | opus | DEFINE + PLAN + REVIEW 全流程 |
-| `full-stack-developer` | sonnet | BUILD 全栈实现 |
-| `backend-developer` | sonnet | BUILD 后端实现 |
-| `frontend-developer` | sonnet | BUILD 前端实现 |
-| `junior-reviewer` | sonnet | 单轮 REVIEW |
+| `full-stack-developer` | sonnet | BUILD + FIX（单体） |
+| `backend-developer` | sonnet | BUILD + FIX（后端） |
+| `frontend-developer` | sonnet | BUILD + FIX（前端） |
 
 ## 生命周期
 
 ```
-RUSH    (S) → /rush    → full-stack-developer → junior-reviewer → full-stack-developer
-RAMBLE  (L) → /ramble  → senior-engineer → build → senior-engineer → fix
-FIX     (FIX) → /fix  → full-stack-developer → full-stack-developer → junior-reviewer
-DEFINE    → interview-me, spec-driven-development
-PLAN      → planning-and-task-breakdown
-BUILD     → incremental-implementation
-REVIEW    → code-review-and-quality, security-and-hardening
-DOC       → /doc      → 文档归档
+RUSH    (S) → /rush    → subagent: full-stack-developer → inline: review → subagent: full-stack-developer
+RAMBLE  (L) → /ramble  → inline: spec → plan → subagent: build → inline: review → subagent: fix
+PATCH   (FIX) → /patch  → subagent: diagnose → subagent: fix → inline: review
+DEFINE    → dev:spec → interview-me, spec-driven-development
+PLAN      → dev:plan → planning-and-task-breakdown
+BUILD     → dev:build → incremental-implementation
+TEST      → dev:test → backend-test-generator
+REVIEW    → dev:review → code-review-and-quality, security-and-hardening
+FIX       → dev:fix
+DOC       → /doc    → 文档归档
 ```
 
 ## 核心规则
 
-- 如果任务匹配某个 Skill，通过 `Skill` 工具调用
-- Skill 位于 `skills/<skill-name>/SKILL.md`
 - Skill 是工作流，不是建议——按顺序执行
 - 所有面向人类的文档、Spec、计划、任务列表、审查反馈必须使用中文
 - 产物统一存放于 `.artifacts/<yyyymmdd>/<任务简述>/` 目录下
@@ -113,12 +108,11 @@ DOC       → /doc      → 文档归档
 ## 项目结构
 
 ```
-skills/                    # 11 个 Skill（每个目录一个 SKILL.md）
-agents/                    # 5 个专职 Agent
-commands/                  # Slash Command 定义
+skills/                    # 17 个 Skill（6 phase + 11 utility）
+agents/                    # 3 个专职 Agent（BUILD/FIX）
+commands/                  # 4 个 Slash Command
 references/                # 安全检查清单
 hooks/                     # Session 生命周期 Hooks
-docs/                      # skill-anatomy 格式说明 + 快速入门
 ```
 
 ## 参考清单
