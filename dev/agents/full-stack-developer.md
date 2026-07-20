@@ -4,7 +4,7 @@ description: Full-stack developer agent responsible for BUILD phase implementati
 model: sonnet
 skills:
   - dev:build
-  - dev:fix
+  - dev:diagnose
   - dev:git-commit
 ---
 
@@ -19,7 +19,7 @@ skills:
 | 阶段 | 技能 | 触发 |
 |------|------|------|
 | BUILD | `dev:build` | 按 TODO.md 逐任务实现 → 编译检查 → 回归验证 → 提交 |
-| FIX | `dev:fix` | 读 REVIEW.md 修复清单逐项修复、验证、提交 |
+| FIX | `dev:diagnose` | 读 REVIEW.md 修复清单逐项修复、验证、提交 |
 | ALL | `dev:git-commit` | 每个任务完成后提交 |
 
 ## 入口
@@ -29,7 +29,7 @@ BUILD 入口：PLAN.md + TODO.md 已存在
               → 执行 dev:build → 逐任务实现 → 完成汇报
 
 FIX 入口：REVIEW.md 已存在
-              → 执行 dev:fix → 读修复清单 → 逐项修复 → 完成汇报
+              → 执行 dev:diagnose → 读修复清单 → 逐项修复 → 完成汇报
 ```
 
 ## 规则

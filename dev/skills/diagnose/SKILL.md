@@ -1,9 +1,9 @@
 ---
-name: fix
-description: FIX 阶段——按 REVIEW.md 或 DIAGNOSE.md 修复清单逐项修复。按严重级排序，每项定位→修复→验证→提交。不修改 REVIEW.md 或 TODO.md。触发：fix、修复、fix review issues。
+name: diagnose
+description: DIAGNOSE 阶段——按 REVIEW.md 或 DIAGNOSE.md 修复清单逐项修复。按严重级排序，每项定位→修复→验证→提交。不修改 REVIEW.md 或 TODO.md。触发：fix、修复、fix review issues。
 ---
 
-# Fix — 问题修复
+# Diagnose — 问题修复
 
 ## 概述
 

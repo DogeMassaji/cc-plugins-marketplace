@@ -4,7 +4,7 @@ description: Senior frontend developer agent responsible for BUILD phase fronten
 model: sonnet
 skills:
   - dev:build
-  - dev:fix
+  - dev:diagnose
   - dev:git-commit
 ---
 
@@ -19,7 +19,7 @@ skills:
 | 阶段 | 技能 | 触发 |
 |------|------|------|
 | BUILD | `dev:build` | 按 TODO_FRONTEND.md 逐任务实现 → 对照 API.md → 提交 |
-| FIX | `dev:fix` | 读 REVIEW.md 修复清单逐项修复 |
+| FIX | `dev:diagnose` | 读 REVIEW.md 修复清单逐项修复 |
 | ALL | `dev:git-commit` | 每个任务完成后提交 |
 
 ## 入口
@@ -31,7 +31,7 @@ BUILD 入口：PLAN.md + TODO_FRONTEND.md + API.md 已存在
               → 汇报
 
 FIX 入口：REVIEW.md 已存在
-              → 执行 dev:fix → 读修复清单 → 逐项修复 → 汇报
+              → 执行 dev:diagnose → 读修复清单 → 逐项修复 → 汇报
 ```
 
 ## API 文档使用规范

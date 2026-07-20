@@ -28,15 +28,16 @@
     "./skills/build",
     "./skills/test",
     "./skills/review",
-    "./skills/fix"
+    "./skills/diagnose"
   ],
   "commands": [
     "./commands/ramble.md",
-    "./commands/patch.md",
+    "./commands/fix.md",
     "./commands/doc.md",
     "./commands/rush.md"
   ],
   "agents": [
+    "./agents/planner.md",
     "./agents/full-stack-developer.md",
     "./agents/frontend-developer.md",
     "./agents/backend-developer.md"

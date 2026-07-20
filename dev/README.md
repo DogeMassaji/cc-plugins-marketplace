@@ -12,7 +12,7 @@
 |------|------|------|
 | `/rush` | ≤100 LOC | BUILD（subagent）→ REVIEW（inline）→ FIX（subagent） |
 | `/ramble` | >100 LOC | DEFINE + PLAN（inline）→ BUILD（subagent，支持前后端分离）→ REVIEW（inline）→ FIX（subagent） |
-| `/patch` | 不限 | DIAGNOSE（subagent）→ FIX（subagent）→ REVIEW（inline） |
+| `/fix` | 不限 | DIAGNOSE（subagent）→ FIX（subagent）→ REVIEW（inline） |
 
 ## 阶段执行方式
 
@@ -32,7 +32,7 @@
     │         ├── REVIEW → inline: dev:review
     │         └── FIX → subagent: dev:full-stack-developer / dev:backend-developer / dev:frontend-developer
     │
-    ├── 有 bug 需要诊断修复？────────→ /patch
+    ├── 有 bug 需要诊断修复？────────→ /fix
     │         ├── DIAGNOSE → subagent: dev:full-stack-developer
     │         ├── FIX → subagent: dev:full-stack-developer
     │         └── REVIEW → inline: dev:review
@@ -59,7 +59,7 @@
 | `dev:build` | BUILD | TODO.md → 实现代码 |
 | `dev:test` | TEST | 变更 → 测试 + TEST_REPORT.md |
 | `dev:review` | REVIEW | diff → REVIEW.md + TODO 更新 |
-| `dev:fix` | FIX | REVIEW.md → 修复代码 |
+| `dev:diagnose` | FIX | REVIEW.md → 修复代码 |
 
 ## Utility Skills
 
@@ -89,13 +89,13 @@
 ```
 RUSH    (S) → /rush    → subagent: full-stack-developer → inline: review → subagent: full-stack-developer
 RAMBLE  (L) → /ramble  → inline: spec → plan → subagent: build → inline: review → subagent: fix
-PATCH   (FIX) → /patch  → subagent: diagnose → subagent: fix → inline: review
+PATCH   (FIX) → /fix  → subagent: diagnose → subagent: fix → inline: review
 DEFINE    → dev:spec → interview-me, spec-driven-development
 PLAN      → dev:plan → planning-and-task-breakdown
 BUILD     → dev:build → incremental-implementation
 TEST      → dev:test → backend-test-generator
 REVIEW    → dev:review → code-review-and-quality, security-and-hardening
-FIX       → dev:fix
+FIX       → dev:diagnose
 DOC       → /doc    → 文档归档
 ```
 

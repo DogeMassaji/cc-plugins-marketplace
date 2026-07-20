@@ -15,7 +15,7 @@ description: Pre-merge sanity check — compile, security scan, convention check
 - 提交前快速验证
 - 配合 `dev:code-review-and-quality`——预检过再进完整审查
 
-**不用时：** 需改代码的场景（走 `dev:fix`）。
+**不用时：** 需改代码的场景（走 `dev:diagnose`）。
 
 ## 流程
 

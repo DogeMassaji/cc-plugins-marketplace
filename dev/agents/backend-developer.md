@@ -4,7 +4,7 @@ description: Senior backend developer agent responsible for BUILD phase backend 
 model: sonnet
 skills:
   - dev:build
-  - dev:fix
+  - dev:diagnose
   - dev:api-doc-generator
   - dev:git-commit
 ---
@@ -21,7 +21,7 @@ skills:
 |------|------|------|
 | BUILD | `dev:build` | 按 TODO_BACKEND.md 逐任务实现 → 编译检查 → 回归验证 → 提交 |
 | BUILD | `dev:api-doc-generator` | 任务完成后生成 API 文档 |
-| FIX | `dev:fix` | 读 REVIEW.md 修复清单逐项修复 |
+| FIX | `dev:diagnose` | 读 REVIEW.md 修复清单逐项修复 |
 | ALL | `dev:git-commit` | 每个任务完成后提交 |
 
 ## 入口
@@ -33,7 +33,7 @@ BUILD 入口：PLAN.md + TODO_BACKEND.md 已存在
               → 汇报
 
 FIX 入口：REVIEW.md 已存在
-              → 执行 dev:fix → 读修复清单 → 逐项修复 → 汇报
+              → 执行 dev:diagnose → 读修复清单 → 逐项修复 → 汇报
 ```
 
 ## 归档
