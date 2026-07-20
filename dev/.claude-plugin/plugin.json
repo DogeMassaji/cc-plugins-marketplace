@@ -1,7 +1,7 @@
 {
   "name": "dev",
   "description": "Production-grade engineering skills for AI coding agents — covering the full software development lifecycle from spec to ship. Forked from @addyosmani/agent-skills",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "author": {
     "name": "DogeMassaji"
   },
@@ -18,6 +18,8 @@
     "./skills/spec-driven-development",
     "./skills/using-agent-skills",
     "./skills/git-commit",
+    "./skills/git-squash",
+    "./skills/ask",
     "./skills/api-doc-generator",
     "./skills/backend-test-generator",
     "./skills/quick-check",
